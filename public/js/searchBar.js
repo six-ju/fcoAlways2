@@ -23,6 +23,8 @@ $(document).ready(function () {
     });
 
     $('.officialSearchBtn').click(function () {
+        showModal('아직 준비중임.');
+        return;
         if (saveSearchNickName == '') {
             alert('닉네임 검색후 이용 가능합니다.');
             return;
@@ -36,6 +38,24 @@ $(document).ready(function () {
 
         // searchMatch(saveSearchNickName);
     });
+
+    // 간단 정보를 클릭시 액션
+    $('.matchEachInfo').click(function(){
+        const $detail = $(this).find('.matchEachDetail');
+
+        const isOpen = $detail.hasClass('show');
+      
+        if (isOpen) {
+            $(this).find('.matchEachSimple').css({'margin-bottom':'15px','border-radius':'25px'})
+            $detail.css('margin-bottom','0px')
+          $detail.removeClass('show').stop().slideUp(100);
+        } else {
+            $(this).find('.matchEachSimple').css({'margin-bottom':'0px','border-radius':'25px 25px 0 0'})
+            $detail.css('margin-bottom','15px')
+          $detail.addClass('show').stop().slideDown(100);
+        }
+
+    })
 });
 
 function searchNickName(nickName) {
@@ -87,14 +107,29 @@ function searchMatch(nickName) {
                     const otherMatchScore = otherInfo.shoot.goalTotal;
 
                     list += `
-                        <div class="matchEachInfo ${userMatchResult == '승' ? '' : 'lose'}">
-                            <div class="nickNameDiv">${userInfo.nickname}</div>
-                            <div class="resultDiv">${userMatchResult}</div>
-                            <div class="scoreDiv">${userMatchScore}</div>
-                            <div>:</div>
-                            <div class="scoreDiv">${otherMatchScore}</div>
-                            <div class="resultDiv">${otherMatchResult}</div>
-                            <div class="nickNameDiv">${otherInfo.nickname}</div>
+                        <div class="matchEachInfo ">
+                            <div class="matchEachSimple ${userMatchResult == '승' ? '' : 'lose'}">
+                                <div class="nickNameDiv">${userInfo.nickname}</div>
+                                <div class="resultDiv">${userMatchResult}</div>
+                                <div class="scoreDiv">${userMatchScore}</div>
+                                <div>:</div>
+                                <div class="scoreDiv">${otherMatchScore}</div>
+                                <div class="resultDiv">${otherMatchResult}</div>
+                                <div class="nickNameDiv">${otherInfo.nickname}</div>
+                            </div>
+                            <div class="matchEachDetail">
+                            <div>
+                                <div class="matchEachDetailInfo">
+                                    <div>상원아</div>
+                                    <div>승</div>
+                                    <div>5</div>
+                                    <div>:</div>
+                                    <div>2</div>
+                                    <div>패</div>
+                                    <div>신</div>
+                                </div>
+                            </div>
+                        </div>
                         </div>
                     `;
                 });
