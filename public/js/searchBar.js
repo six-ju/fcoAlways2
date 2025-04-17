@@ -27,8 +27,8 @@ function searchNickName(nickName) {
                 $('#managerDate').text(data.matchResult[1].maxRank);
             }
         },
-        error: function () {
-            console.error('Error fetching data from the API');
+        error: function (err) {
+            console.log(err.responseJSON.message);
         },
     });
 }
@@ -48,8 +48,8 @@ function searchMatch(nickName){
                 $('#managerDate').text(data.matchResult[1].maxRank);
             }
         },
-        error: function () {
-            console.error('Error fetching data from the API');
+        error: function (err) {
+            console.log(err);
         },
     });
 }

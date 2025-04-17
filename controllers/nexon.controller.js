@@ -13,7 +13,7 @@ class nexonController {
 
             return res.status(200).json(result);
         } catch (error) {
-            throw error;
+            return res.status(error.status || 400).json({ message: error.message });
         }
     };
 }

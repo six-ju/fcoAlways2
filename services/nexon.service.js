@@ -15,7 +15,6 @@ class nexonService {
             // 유저 ouid 조회
             if (nickName !== '') {
                 ouid = await this.nexonRepository.getOuid(nickName);
-                ouid = ouid.ouid;
             }
 
             // 등록된 유저가 없다면 API 호출후 ouid 저장
@@ -26,7 +25,9 @@ class nexonService {
                         headers: {
                             'x-nxopen-api-key': process.env.NEXON_API_KEY,
                         },
+                        validateStatus: () => true // ✔ 모든 응답을 catch로 보내지 않고 처리
                     },
+                    
                 );
 
                 if (ouidResult.status !== 200) {
@@ -36,6 +37,8 @@ class nexonService {
                 // 유저 ouid 저장
                 await this.nexonRepository.saveOuid(nickName, ouidResult.data);
                 ouid = ouidResult.data.ouid
+            }else{
+                ouid = ouid.ouid;
             }
 
             // 유저 기본정보 조회
