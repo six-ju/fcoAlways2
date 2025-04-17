@@ -1,0 +1,46 @@
+<style>
+    /* CSS - common.css에 추가 */
+    #loadingWrap {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 9999;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.4);
+        display: none; /* 기본 숨김 */
+        justify-content: center;
+        align-items: center;
+    }
+
+    .loadingBox {
+        text-align: center;
+        color: white;
+    }
+
+    .loader {
+        border: 8px solid #ddd;
+        border-top: 8px solid #4e996c; /* FIFA 느낌의 초록 포인트 */
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 15px;
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+<!-- 📁 views/share/loading.ejs 또는 index.ejs 안에 넣기 -->
+<div id="loadingWrap">
+    <div class="loadingBox">
+        <div class="loader"></div>
+        <p>데이터 불러오는 중... ⚽</p>
+    </div>
+</div>
