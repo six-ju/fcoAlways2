@@ -13,6 +13,15 @@ $(document).ready(function () {
         }
     });
 
+    $('.searchButton').click(function () {
+        const nickName = $('#nickname').val().trim();
+
+        if (nickName != '') {
+            searchNickName(nickName);
+            saveSearchNickName = nickName;
+        }
+    });
+
     $('.officialSearchBtn').click(function () {
         if (saveSearchNickName == '') {
             alert('닉네임 검색후 이용 가능합니다.');
@@ -22,9 +31,9 @@ $(document).ready(function () {
     });
 
     $('.managerSearchBtn').click(function () {
-            alert('아직 준비중임.');
-            return;
-        
+        showModal('아직 준비중임.');
+        return;
+
         // searchMatch(saveSearchNickName);
     });
 });
@@ -34,7 +43,6 @@ function searchNickName(nickName) {
         url: `/api/nexon/search/${nickName}`,
         type: 'GET',
         success: function (data) {
-            console.log(data);
             if (data) {
                 $('#name').text(data.nickName);
                 $('#level').text(data.level);
@@ -42,10 +50,15 @@ function searchNickName(nickName) {
                 $('#officialDate').text(data.matchResult[0].maxRank);
                 $('#managerMax').text(data.matchResult[1].maxDivision);
                 $('#managerDate').text(data.matchResult[1].maxRank);
+
+                $('.userInfo').removeClass('hide')
+                $('.matchInfo').removeClass('hide')
+                $('#nickname').css('border-radius', '25px 25px 0 0')
+                
             }
         },
         error: function (err) {
-            console.log(err.responseJSON.message);
+            showModal(err.responseJSON.message);
         },
     });
 }
@@ -55,7 +68,7 @@ function searchMatch(nickName) {
         url: `/api/nexon/match/${nickName}`,
         type: 'GET',
         success: function (data) {
-            console.log(data);
+            $('.matchList').empty();
             let list = '';
 
             if (data) {
@@ -80,12 +93,12 @@ function searchMatch(nickName) {
                         </div>
                     `;
                 });
-                console.log(list);
+
                 $('.matchList').html(list);
             }
         },
         error: function (err) {
-            console.log(err.responseJSON.message);
+            showModal(err.responseJSON.message);
         },
     });
 }

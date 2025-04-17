@@ -22,7 +22,11 @@ body {
     justify-content: space-between;
 }
 
-.mainArea{
+.mainArea {
     height: 74%;
     flex: 1;
+}
+
+.hide {
+    display: none;
 }
