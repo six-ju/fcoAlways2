@@ -103,3 +103,34 @@
     display: flex;
     justify-content: center;
 }
+
+.matchList {
+    margin: 40px 0px;
+}
+
+.matchEachInfo {
+    background-color: #4e996c;
+    border-radius: 25px;
+    display: flex;
+    justify-content: space-around;
+    padding: 35px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.matchEachInfo:hover {
+    background-color: #3b7e57;
+    color: white;
+    cursor: pointer;
+}
+
+.matchEachInfo.lose {
+    background-color: #dc4c4c; /* 기본 붉은색 */
+    color: white;
+}
+
+.matchEachInfo.lose:hover {
+    background-color: #b53737; /* 더 진한 붉은색 */
+    color: white;
+    cursor: pointer;
+}

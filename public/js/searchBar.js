@@ -23,6 +23,8 @@ $(document).ready(function () {
     });
 
     $('.officialSearchBtn').click(function () {
+        showModal('아직 준비중임.');
+        return;
         if (saveSearchNickName == '') {
             alert('닉네임 검색후 이용 가능합니다.');
             return;
