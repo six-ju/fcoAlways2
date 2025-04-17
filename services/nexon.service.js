@@ -2,6 +2,8 @@ const nexonRepository = require('../repositories/nexon.repository');
 const { default: axios } = require('axios');
 const { MATCH_TYPE, DIVISION } = require('../config/variables');
 const dayjs = require('dayjs');
+const { sleep } = require('../utills/common');
+const startUrl = process.env.NEXON_API_START_URL;
 
 class nexonService {
     constructor() {
@@ -10,7 +12,6 @@ class nexonService {
 
     searchNickName = async (nickName) => {
         try {
-            const startUrl = process.env.NEXON_API_START_URL;
             let ouid = '';
             // 유저 ouid 조회
             if (nickName !== '') {
@@ -25,9 +26,8 @@ class nexonService {
                         headers: {
                             'x-nxopen-api-key': process.env.NEXON_API_KEY,
                         },
-                        validateStatus: () => true // ✔ 모든 응답을 catch로 보내지 않고 처리
+                        validateStatus: () => true, // ✔ 모든 응답을 catch로 보내지 않고 처리
                     },
-                    
                 );
 
                 if (ouidResult.status !== 200) {
@@ -36,20 +36,17 @@ class nexonService {
 
                 // 유저 ouid 저장
                 await this.nexonRepository.saveOuid(nickName, ouidResult.data);
-                ouid = ouidResult.data.ouid
-            }else{
+                ouid = ouidResult.data.ouid;
+            } else {
                 ouid = ouid.ouid;
             }
 
             // 유저 기본정보 조회
-            const basicResult = await axios.get(
-                `${startUrl}/fconline/v1/user/basic?ouid=${ouid}`,
-                {
-                    headers: {
-                        'x-nxopen-api-key': process.env.NEXON_API_KEY,
-                    },
+            const basicResult = await axios.get(`${startUrl}/fconline/v1/user/basic?ouid=${ouid}`, {
+                headers: {
+                    'x-nxopen-api-key': process.env.NEXON_API_KEY,
                 },
-            );
+            });
 
             // 유저 최고랭크 조회
             const maxdivisionResult = await axios.get(
@@ -81,6 +78,48 @@ class nexonService {
 
             return data;
         } catch (error) {
+            throw error;
+        }
+    };
+
+    searchMatch = async (nickname) => {
+        try {
+            const matchDetailResult = [];
+
+            // 유저 ouid 조회
+            const ouid = await this.nexonRepository.getOuid(nickname);
+
+            // 유저 매치 기록 조회 (일단 공식 경기만)
+            const matchIdResult = await axios.get(
+                `${startUrl}/fconline/v1/user/match?ouid=${ouid.ouid}&matchtype=50&offset=0&limit=20`,
+                {
+                    headers: {
+                        'x-nxopen-api-key': process.env.NEXON_API_KEY,
+                    },
+                },
+            );
+
+            for (const id of matchIdResult.data) {
+                const detailData = await axios.get(
+                    `${startUrl}/fconline/v1/match-detail?matchid=${id}`,
+                    {
+                        headers: {
+                            'x-nxopen-api-key': process.env.NEXON_API_KEY,
+                        },
+                    },
+                );
+                matchDetailResult.push([detailData.data.matchDate, detailData.data.matchInfo]);
+
+                await sleep(100); // 100ms 쉬고 다음 요청
+            }
+
+            // matchDetailResult.map((data, index) => {
+            //     const userInfo = 
+            // })
+
+            return matchDetailResult;
+        } catch (error) {
+            console.error('Error fetching match details:', error);
             throw error;
         }
     };

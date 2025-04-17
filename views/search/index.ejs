@@ -1,23 +1,34 @@
-<link rel="stylesheet" href="/css/searchBar.css">
+<link rel="stylesheet" href="/css/searchBar.css" />
 
 <div class="searchBarContainer">
     <div class="userSearchArea">
-        <input type="text" id="nickname" placeholder="유저명을 입력해주세요">
+        <input type="text" id="nickname" placeholder="유저명을 입력해주세요" />
     </div>
-    <div class="userInfo">
-        <div>
-            <label for="name">닉네임 :</label>
-            <div id="name"></div>
-            <label for="level">레벨 :</label>
-            <div id="level"></div>
-            <label for="officialMax">공식경기 최고 등급 :</label>
-            <div id="officialMax"></div>
-            <label for="officialDate">달성 날짜 :</label>
-            <div id="officialDate"></div>
-            <label for="managerMax">감독경기 최고 등급 :</label>
-            <div id="managerMax"></div>
-            <label for="managerDate">달성 날짜 :</label>
-            <div id="managerDate"></div>
+    <div class="userContent">
+        <div class="userInfo">
+            <div>
+                <label for="name">닉네임 :</label>
+                <div id="name"></div>
+                <label for="level">레벨 :</label>
+                <div id="level"></div>
+                <label for="officialMax">공식경기 최고 등급 :</label>
+                <div id="officialMax"></div>
+                <label for="officialDate">달성 날짜 :</label>
+                <div id="officialDate"></div>
+                <label for="managerMax">감독경기 최고 등급 :</label>
+                <div id="managerMax"></div>
+                <label for="managerDate">달성 날짜 :</label>
+                <div id="managerDate"></div>
+            </div>
+        </div>
+        <div class="matchInfo">
+            <div class="matchContent">
+                <div class="matchSearchBtnWrap">
+                    <button class="officialSearchBtn">공식 경기</button>
+                    <button class="managerSearchBtn">감독 경기</button>
+                </div>
+                <div class="matchList"></div>
+            </div>
         </div>
     </div>
 </div>

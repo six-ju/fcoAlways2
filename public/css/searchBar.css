@@ -1,4 +1,4 @@
-.searchBarContainer{
+.searchBarContainer {
     margin: 100px auto;
     padding: 0 20px;
 }
@@ -15,4 +15,23 @@
     border-radius: 25px;
     width: 100%;
     box-sizing: border-box;
+}
+
+.userContent {
+    display: flex;
+    flex-direction: row;
+}
+
+.userContent .matchInfo {
+    margin: 0 auto;
+    width: 780px;
+}
+
+.matchContent {
+    text-align: center;
+}
+
+.matchEachInfo {
+    display: flex;
+    justify-content: center;
 }

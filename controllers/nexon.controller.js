@@ -16,6 +16,18 @@ class nexonController {
             return res.status(error.status || 400).json({ message: error.message });
         }
     };
+
+    searchMatch = async (req, res) => {
+        try {
+            const { nickName } = req.params;
+
+            const result = await this.nexonService.searchMatch(nickName);
+
+            return res.status(200).json(result);
+        } catch (error) {
+            return res.status(error.status || 400).json({ message: '전적 검색 도중 오류가 발생했습니다.'});
+        }
+    };
 }
 
 module.exports = nexonController;

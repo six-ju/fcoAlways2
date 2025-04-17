@@ -5,8 +5,8 @@
         <meta charset="UTF-8" />
         <title>FCOAlways</title>
         <link rel="stylesheet" href="/css/common.css" />
-
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     </head>
     <body>
         <div class="container">
@@ -15,7 +15,8 @@
 
             <main class="mainArea">
                 <!-- 메인 검색 바 -->
-                <% if (components === 'searchNickname') { %> <%- include('search/index.ejs') %> <% } %> 
+                <% if (components === 'searchNickname') { %> <%- include('search/index.ejs') %> <% }
+                %>
             </main>
 
             <!-- 공통 푸터 -->
