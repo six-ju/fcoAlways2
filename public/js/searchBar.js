@@ -23,8 +23,6 @@ $(document).ready(function () {
     });
 
     $('.officialSearchBtn').click(function () {
-        showModal('아직 준비중임.');
-        return;
         if (saveSearchNickName == '') {
             alert('닉네임 검색후 이용 가능합니다.');
             return;
@@ -51,10 +49,9 @@ function searchNickName(nickName) {
                 $('#officialMax').text(data.matchResult[0].maxDivision);
                 $('#managerMax').text(data.matchResult[1].maxDivision);
 
-                $('.userInfo').removeClass('hide')
-                $('.matchInfo').removeClass('hide')
-                $('#nickname').css('border-radius', '25px 25px 0 0')
-                
+                $('.userInfo').removeClass('hide');
+                $('.matchInfo').removeClass('hide');
+                $('#nickname').css('border-radius', '25px 25px 0 0');
             }
         },
         error: function (err) {
@@ -82,20 +79,20 @@ function searchMatch(nickName) {
                     const otherMatchScore = otherInfo.shoot.goalTotal;
 
                     list += `
-                        <div class="matchEachInfo">
-                            <div>${userInfo.nickname}</div>
-                            <div>${userMatchResult}</div>
-                            <div>${userMatchScore}</div>
+                        <div class="matchEachInfo ${userMatchResult == '승' ? '' : 'lose'}">
+                            <div class="nickNameDiv">${userInfo.nickname}</div>
+                            <div class="resultDiv">${userMatchResult}</div>
+                            <div class="scoreDiv">${userMatchScore}</div>
                             <div>:</div>
-                            <div>${otherMatchScore}</div>
-                            <div>${otherMatchResult}</div>
-                            <div>${otherInfo.nickname}</div>
+                            <div class="scoreDiv">${otherMatchScore}</div>
+                            <div class="resultDiv">${otherMatchResult}</div>
+                            <div class="nickNameDiv">${otherInfo.nickname}</div>
                         </div>
                     `;
                 });
 
                 $('.matchList').html(list);
-                $('.officialSearchBtn').addClass('action')
+                $('.officialSearchBtn').addClass('action');
             }
         },
         error: function (err) {
