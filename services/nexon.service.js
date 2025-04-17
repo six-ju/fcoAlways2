@@ -110,7 +110,7 @@ class nexonService {
                 );
                 matchDetailResult.push([detailData.data.matchDate, detailData.data.matchInfo]);
 
-                await sleep(100); // 100ms 쉬고 다음 요청
+                await sleep(80); // 100ms 쉬고 다음 요청
             }
 
             // matchDetailResult.map((data, index) => {

@@ -15,7 +15,7 @@ body {
     width: 100%;
     max-width: 1090px;
     margin: 0 auto;
-    height: 100vh;
+    min-height: 100vh;
     /* 세로 정렬후 각자 벌림 */
     display: flex;
     flex-direction: column;
@@ -24,4 +24,5 @@ body {
 
 .mainArea{
     height: 74%;
+    flex: 1;
 }
