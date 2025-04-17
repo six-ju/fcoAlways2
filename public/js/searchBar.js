@@ -64,6 +64,14 @@ function searchMatch(nickName) {
     $.ajax({
         url: `/api/nexon/match/${nickName}`,
         type: 'GET',
+        beforeSend: function () {
+            $('.matchList').empty();
+            $('.officialSearchBtn').addClass('action');
+            showLoading();
+        },
+        complete: function () {
+            hideLoading();
+        },
         success: function (data) {
             $('.matchList').empty();
             let list = '';
@@ -92,7 +100,6 @@ function searchMatch(nickName) {
                 });
 
                 $('.matchList').html(list);
-                $('.officialSearchBtn').addClass('action');
             }
         },
         error: function (err) {
