@@ -6,6 +6,7 @@
 .userSearchArea {
     width: 100%;
     margin: 0 auto;
+    max-width: 760px;
 }
 
 .userSearchArea #nickname {
@@ -16,19 +17,54 @@
     box-sizing: border-box;
 }
 
-.officialSearchBtn,
-.managerSearchBtn {
+.matchSearchBtnWrap {
+    display: flex;
+    width: 100%;
+}
+
+.officialSearchBtn {
+    flex: 1;
     border: 0;
     background-color: rgb(129 129 129);
-    font-size: 35px;
-    padding: 12px 84px;
-    border-radius: 23px;
-    margin: 11px 0px;
+    font-size: 24px;
+    padding: 6px 64px;
+    border-radius: 0 0 0px 25px;
+    cursor: pointer;
+    border-bottom: 2px solid;
+    border-left: 2px solid;
+    border-right: 2px solid;
+}
+
+.officialSearchBtn:hover {
+    background-color: #007bff;
+    color: white;
+    border-bottom: 2px solid #007bff;
+    border-left: 2px solid #007bff;
+    border-right: 2px solid black;
+}
+
+.managerSearchBtn {
+    flex: 1;
+    border: 0;
+    background-color: rgb(129 129 129);
+    font-size: 24px;
+    padding: 6px 64px;
+    border-radius: 0 0 25px 0px;
+    cursor: pointer;
+    border-bottom: 2px solid;
+    border-right: 2px solid;
+}
+
+.managerSearchBtn:hover {
+    background-color: #007bff;
+    color: white;
+    border-bottom: 2px solid #007bff;
+    border-right: 2px solid #007bff;
 }
 
 .searchButton {
     top: 35px;
-    left: 982px;
+    left: 682px;
     position: relative;
     cursor: pointer;
 }
@@ -36,25 +72,27 @@
 .userContent {
     display: flex;
     flex-direction: column;
+    max-width: 760px;
+    width: 100%;
+    margin: 0 auto;
 }
 
 .userInfoWrap {
     display: flex;
     flex-direction: row;
-    border-radius: 0px 0px 25px 25px;
     border: 2px solid black;
     border-top: 0;
     padding: 15px 25px;
     gap: 40px;
 }
 .userInfoWrap > div {
-    width: 134px;
+    width: 147px;
     display: flex;
 }
 
 .userContent .matchInfo {
     margin: 0 auto;
-    width: 780px;
+    width: 760px;
 }
 
 .matchContent {

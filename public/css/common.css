@@ -30,3 +30,8 @@ body {
 .hide {
     display: none;
 }
+
+.action {
+    background-color: #007bff !important;
+    color: white !important;
+}

@@ -47,9 +47,7 @@ function searchNickName(nickName) {
                 $('#name').text(data.nickName);
                 $('#level').text(data.level);
                 $('#officialMax').text(data.matchResult[0].maxDivision);
-                $('#officialDate').text(data.matchResult[0].maxRank);
                 $('#managerMax').text(data.matchResult[1].maxDivision);
-                $('#managerDate').text(data.matchResult[1].maxRank);
 
                 $('.userInfo').removeClass('hide')
                 $('.matchInfo').removeClass('hide')
@@ -95,6 +93,7 @@ function searchMatch(nickName) {
                 });
 
                 $('.matchList').html(list);
+                $('.officialSearchBtn').addClass('action')
             }
         },
         error: function (err) {
