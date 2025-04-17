@@ -1,0 +1,18 @@
+.searchBarContainer{
+    margin: 100px auto;
+    padding: 0 20px;
+}
+
+.userSearchArea {
+    width: 100%;
+    max-width: 594px;
+    margin: 0 auto;
+}
+
+.userSearchArea #nickname {
+    padding: 15px 25px;
+    border: 2px solid black;
+    border-radius: 25px;
+    width: 100%;
+    box-sizing: border-box;
+}

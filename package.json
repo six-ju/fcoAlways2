@@ -1,0 +1,32 @@
+{
+    "name": "myfifareacte",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "start": "node app.js",
+        "dev": "nodemon app.js",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        
+        "//": "마이그레이션 적용",
+        "migrate": "npx sequelize db:migrate",
+        "//": "마이그레이션 롤백",
+        "migrate:undo": "npx sequelize db:migrate:undo"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {
+        "axios": "^1.8.4",
+        "dayjs": "^1.11.13",
+        "dotenv": "^16.5.0",
+        "ejs": "^3.1.10",
+        "express": "^5.1.0",
+        "mysql2": "^3.14.0",
+        "sequelize": "^6.37.7",
+        "sequelize-cli": "^6.6.2"
+    },
+    "devDependencies": {
+        "nodemon": "^3.1.9"
+    }
+}

@@ -1,0 +1,27 @@
+@font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2')
+        format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'SUIT-Regular';
+    margin: 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 1090px;
+    margin: 0 auto;
+    height: 100vh;
+    /* 세로 정렬후 각자 벌림 */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.mainArea{
+    height: 74%;
+}

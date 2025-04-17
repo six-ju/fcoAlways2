@@ -1,0 +1,25 @@
+<!-- 📁 views/index.ejs -->
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <title>FCOAlways</title>
+        <link rel="stylesheet" href="/css/common.css" />
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <!-- 공통 헤더 -->
+            <%- include('share/header.ejs') %>
+
+            <main class="mainArea">
+                <!-- 메인 검색 바 -->
+                <% if (components === 'searchNickname') { %> <%- include('search/index.ejs') %> <% } %> 
+            </main>
+
+            <!-- 공통 푸터 -->
+            <%- include('share/footer.ejs') %>
+        </div>
+    </body>
+</html>
