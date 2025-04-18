@@ -4,7 +4,6 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
     class Season extends Model {
         static associate(models) {
-            this.hasMany(models.SeasonPlayer, { foreignKey: 'season_id' });
         }
     }
 
@@ -19,11 +18,15 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
+            img: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
         },
         {
             sequelize,
             modelName: 'Season',
-            tableName: 'seasons',
+            tableName: 'season',
             timestamps: true,
             updatedAt: false,
         },

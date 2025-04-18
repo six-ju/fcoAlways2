@@ -36,10 +36,10 @@
 }
 
 .officialSearchBtn:hover {
-    background-color: #007bff;
+    background-color: #4e996c;
     color: white;
-    border-bottom: 2px solid #007bff;
-    border-left: 2px solid #007bff;
+    border-bottom: 2px solid #4e996c;
+    border-left: 2px solid #4e996c;
     border-right: 2px solid black;
 }
 
@@ -56,10 +56,10 @@
 }
 
 .managerSearchBtn:hover {
-    background-color: #007bff;
+    background-color: #4e996c;
     color: white;
-    border-bottom: 2px solid #007bff;
-    border-right: 2px solid #007bff;
+    border-bottom: 2px solid #4e996c;
+    border-right: 2px solid #4e996c;
 }
 
 .searchButton {
@@ -113,9 +113,7 @@
     font-size: 17px;
     margin-bottom: 15px;
     gap: 65px;
-    transition: 
-    border-radius 0.2s ease,
-    margin-bottom 0.2s ease;
+    transition: border-radius 0.2s ease, margin-bottom 0.2s ease;
 }
 
 .matchEachSimple:hover {
@@ -134,17 +132,67 @@
     cursor: pointer;
 }
 
-.nickNameDiv{
+.nickNameDiv {
     width: 185px;
 }
 
-.matchEachDetail{
+.matchEachDetail {
     border-radius: 0 0 25px 25px;
     border: 1px solid #4e996c;
     border-top: 0;
 }
 
-.matchEachSimple.lose + .matchEachDetail{
+.matchEachSimple.lose + .matchEachDetail {
     border: 1px solid #b53737;
     border-top: 0;
+}
+
+/* 토글안 CSS */
+
+.matchEachDetailBtnWrap {
+    display: flex;
+}
+
+.matchEachDetailInfoWrap {
+    display: flex;
+    padding: 15px 0;
+}
+
+.matchEachDetailBtnWrap div {
+    border-bottom: 1px solid #4e996c;
+    width: 253px;
+    padding: 17px;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.matchEachDetailBtnWrap div:hover {
+    background-color: #4e996c;
+    color: white;
+}
+
+.matchEachSimple.lose + .matchEachDetail .matchEachDetailBtnWrap div {
+    border-bottom: 1px solid #b53737 !important;
+    width: 253px;
+    padding: 17px;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.matchEachSimple.lose + .matchEachDetail .matchEachDetailBtnWrap div.action {
+    background-color: #b53737 !important;
+}
+
+.matchEachSimple.lose + .matchEachDetail .matchEachDetailBtnWrap div:hover {
+    background-color: #b53737 !important;
+    color: white;
+}
+
+.matchEachDetailOwnerPlace,
+.matchEachDetailMiddlePlace,
+.matchEachDetailOtherPlace {
+    width: 253px;
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 2;
 }

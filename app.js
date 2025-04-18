@@ -8,6 +8,8 @@ dotenv.config(); // .env 환경변수 로딩
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+require('./utills/scheduler');
+
 // 📁 EJS 템플릿 설정
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

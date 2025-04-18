@@ -6,9 +6,8 @@
         "start": "node app.js",
         "dev": "nodemon app.js",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "//": "마이그레이션 실행",
-        "migrate": "npx sequelize db:migrate",
         "//": "마이그레이션 롤백",
+        "migrate": "npx sequelize db:migrate",
         "migrate:undo": "npx sequelize db:migrate:undo"
     },
     "keywords": [],
@@ -22,6 +21,7 @@
         "ejs": "^3.1.10",
         "express": "^5.1.0",
         "mysql2": "^3.14.0",
+        "node-cron": "^3.0.3",
         "sequelize": "^6.37.7",
         "sequelize-cli": "^6.6.2"
     },
