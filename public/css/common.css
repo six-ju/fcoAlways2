@@ -14,7 +14,7 @@ body {
 .container {
     width: 100%;
     max-width: 1090px;
-    margin: 0 auto;
+    /* margin: 0 auto; */
     min-height: 100vh;
     /* 세로 정렬후 각자 벌림 */
     display: flex;
@@ -34,4 +34,27 @@ body {
 .action {
     background-color: #4e996c !important;
     color: white !important;
+}
+
+/* 카카오 광고 */
+/* .kakao_ad_area{
+    display: unset !important;
+} */
+
+.forKaKaoAd {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+}
+
+@media screen and (max-width: 1125px) {
+    .kakao_ad_area {
+        display: none !important;
+    }
+}
+
+@media screen and (min-width: 1125px) {
+    .kakao_ad_area {
+        display: inline-block !important;
+    }
 }

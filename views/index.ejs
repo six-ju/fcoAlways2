@@ -16,24 +16,43 @@
         <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     </head>
     <body>
-        <div class="container">
-            <!-- 공통 헤더 -->
-            <%- include('share/header.ejs') %>
+        <div class="forKaKaoAd">
+            <ins
+                    class="kakao_ad_area"
+                    style="display: none"
+                    data-ad-unit="DAN-oQJN02iYektg09FM"
+                    data-ad-width="160"
+                    data-ad-height="600"
+                ></ins>
+                <script
+                    type="text/javascript"
+                    src="//t1.daumcdn.net/kas/static/ba.min.js"
+                    async
+                ></script>
+            <div class="container">
+                
+                <!-- 공통 헤더 -->
+                <%- include('share/header.ejs') %>
 
-            <main class="mainArea">
-                <!-- 메인 검색 바 -->
-                <% if (components === 'searchNickname') { %> <%- include('search/index.ejs') %> <% }
-                %>
-            </main>
+                <main class="mainArea">
+                    <!-- 메인 검색 바 -->
+                    <% if (components === 'searchNickname') { %> <%- include('search/index.ejs') %>
+                    <% } %>
+                </main>
 
-            <!-- 공통 푸터 -->
-            <%- include('share/footer.ejs') %>
+                <!-- 공통 푸터 -->
+                <%- include('share/footer.ejs') %>
 
-            <!-- 공통 모달 -->
-            <%- include('share/modal.ejs') %>
-            <!-- 공통 로딩 화면 -->
-            <%- include('share/loading.ejs') %>
-
+                <!-- 공통 모달 -->
+                <%- include('share/modal.ejs') %>
+                <!-- 공통 로딩 화면 -->
+                <%- include('share/loading.ejs') %>
+            </div>
+            <ins class="kakao_ad_area" style="display:none;"
+            data-ad-unit = "DAN-2KCdFesbBp9zMxNF"
+            data-ad-width = "160"
+            data-ad-height = "600"></ins>
+            <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
         </div>
     </body>
 </html>

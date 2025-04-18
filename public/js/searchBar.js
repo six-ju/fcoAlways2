@@ -137,7 +137,7 @@ function searchMatch(nickName) {
                                     <div class="matchEachDetailInfoWrap">
                                         <div class="matchEachDetailOwnerPlace">
                                             <div>${userInfo.matchDetail.possession}</div>
-                                            <div>${userInfo.matchDetail.averageRating}</div>
+                                            <div>${Math.round((userInfo.matchDetail.averageRating) * 100) / 100 }</div>
                                             <div>${userInfo.shoot.goalTotalDisplay}</div>
                                             <div>${userInfo.shoot.shootTotal}</div>
                                             <div>${userInfo.shoot.effectiveShootTotal}</div>
@@ -175,7 +175,7 @@ function searchMatch(nickName) {
                                         </div>
                                         <div class="matchEachDetailOtherPlace">
                                             <div>${otherInfo.matchDetail.possession}</div>
-                                            <div>${otherInfo.matchDetail.averageRating}</div>
+                                            <div>${Math.round((otherInfo.matchDetail.averageRating) * 100) / 100 }</div>
                                             <div>${otherInfo.shoot.goalTotalDisplay}</div>
                                             <div>${otherInfo.shoot.shootTotal}</div>
                                             <div>${otherInfo.shoot.effectiveShootTotal}</div>

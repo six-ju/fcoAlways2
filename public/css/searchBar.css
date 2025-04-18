@@ -196,3 +196,7 @@
     font-weight: bold;
     line-height: 2;
 }
+
+
+/* 추후 그라데이션 추가를 위해서
+background-image: linear-gradient(to top, #b53737 0%, #ffc8c8 100%); */
