@@ -6,8 +6,9 @@
         "start": "node app.js",
         "dev": "nodemon app.js",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "//": "마이그레이션 롤백",
+        "//": "마이그레이션 실행",
         "migrate": "npx sequelize db:migrate",
+        "//": "마이그레이션 롤백",
         "migrate:undo": "npx sequelize db:migrate:undo"
     },
     "keywords": [],
