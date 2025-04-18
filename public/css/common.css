@@ -48,13 +48,23 @@ body {
 }
 
 @media screen and (max-width: 1125px) {
-    .kakao_ad_area {
+    .kakao_ad_area.pc {
         display: none !important;
+    }
+
+    .headerMob,
+    .footerMob {
+        display: unset !important;
     }
 }
 
 @media screen and (min-width: 1125px) {
-    .kakao_ad_area {
-        display: inline-block !important;
+    .kakao_ad_area.pc {
+        display: unset !important;
+    }
+
+    .headerMob,
+    .footerMob {
+        display: none !important;
     }
 }
