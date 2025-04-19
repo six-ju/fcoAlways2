@@ -22,9 +22,10 @@ $(document).ready(function () {
         }
     });
 
+    // 공식경기 전적 조회
     $('.officialSearchBtn').click(function () {
-        // showModal('아직 준비중임.');
-        // return;
+        showModal('아직 준비중임.');
+        return;
         if (saveSearchNickName == '') {
             alert('닉네임 검색후 이용 가능합니다.');
             return;
@@ -32,11 +33,62 @@ $(document).ready(function () {
         searchMatch(saveSearchNickName);
     });
 
+    // 감독경기 전적 조회
     $('.managerSearchBtn').click(function () {
         showModal('아직 준비중임.');
         return;
 
         // searchMatch(saveSearchNickName);
+    });
+
+    // 상세정보보 클릭시
+    $('.matchDetail').click(function () {
+        $(this).siblings().removeClass('action');
+        $(this).addClass('action');
+
+        // 컨텐츠 영역 숨김과 보임처리
+        $('.matchEachDetailInfoWrap').css('display','flex')
+        $('.matchEachDetailSquadWrap').css('display','none')
+    });
+
+    // 스쿼드 클릭시
+    $('.matchSquad').click(function () {
+        $(this).siblings().removeClass('action');
+        $(this).addClass('action');
+
+        // 컨텐츠 영역 숨김과 보임처리
+        $('.matchEachDetailInfoWrap').css('display','none')
+        $('.matchEachDetailSquadWrap').css('display','flex')
+
+    });
+
+    // 스쿼드내 유저 클릭시(나)
+    $('.mySquad').click(function () {
+        $(this).siblings().removeClass('action');
+        $(this).addClass('action');
+
+        // 컨텐츠 영역 숨김과 보임처리
+        // $('.matchEachDetailInfoWrap').css('display','none')
+        // $('.matchEachDetailSquadWrap').css('display','flex')
+
+    });
+
+    // 스쿼드내 유저 클릭시(상대대)
+    $('.otherSquad').click(function () {
+        $(this).siblings().removeClass('action');
+        $(this).addClass('action');
+
+        // 컨텐츠 영역 숨김과 보임처리
+        // $('.matchEachDetailInfoWrap').css('display','none')
+        // $('.matchEachDetailSquadWrap').css('display','flex')
+
+    });
+    
+    // 선수평가가 클릭시
+    $('.matchPlayerAvg').click(function () {
+        $(this).siblings().removeClass('action');
+        $(this).addClass('action');
+
     });
 
     // 간단 정보를 클릭시 액션
@@ -55,6 +107,8 @@ $(document).ready(function () {
             $detail.find('.matchEachDetailBtnWrap').find('.matchPlayerAvg').removeClass('action');
 
             $detail.removeClass('show').stop().slideUp(100);
+            $('.matchEachDetailInfoWrap').css('display','flex')
+
         } else {
             $(this).css({ 'margin-bottom': '0px', 'border-radius': '25px 25px 0 0' });
             $detail.css('margin-bottom', '15px');
@@ -62,6 +116,7 @@ $(document).ready(function () {
             // 버튼 색채우기
             $detail.find('.matchEachDetailBtnWrap').find('.matchDetail').addClass('action');
 
+            $('.matchEachDetailSquadWrap').css('display','none')
             $detail.addClass('show').stop().slideDown(100);
         }
     });

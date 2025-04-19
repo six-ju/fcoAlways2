@@ -43,7 +43,7 @@ body::before {
 }
 
 .hide {
-    display: none;
+    display: none ;
 }
 
 .action {

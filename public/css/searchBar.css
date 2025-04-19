@@ -84,8 +84,10 @@
     border-top: 0;
     padding: 15px 25px;
     gap: 40px;
+    background-color: white;
 }
-.userInfoWrap > div {
+
+.userInfoWrap>div {
     width: 147px;
     display: flex;
 }
@@ -123,11 +125,13 @@
 }
 
 .matchEachSimple.lose {
-    background-color: #dc4c4c; /* 기본 붉은색 */
+    background-color: #dc4c4c;
+    /* 기본 붉은색 */
 }
 
 .matchEachSimple.lose:hover {
-    background-color: #b53737; /* 더 진한 붉은색 */
+    background-color: #b53737;
+    /* 더 진한 붉은색 */
     color: white;
     cursor: pointer;
 }
@@ -142,7 +146,7 @@
     border-top: 0;
 }
 
-.matchEachSimple.lose + .matchEachDetail {
+.matchEachSimple.lose+.matchEachDetail {
     border: 1px solid #b53737;
     border-top: 0;
 }
@@ -151,6 +155,10 @@
 
 .matchEachDetailBtnWrap {
     display: flex;
+}
+
+.matchEachDetailInfo {
+    background-color: white;
 }
 
 .matchEachDetailInfoWrap {
@@ -171,7 +179,7 @@
     color: white;
 }
 
-.matchEachSimple.lose + .matchEachDetail .matchEachDetailBtnWrap div {
+.matchEachSimple.lose+.matchEachDetail .matchEachDetailBtnWrap div {
     border-bottom: 1px solid #b53737 !important;
     width: 253px;
     padding: 17px;
@@ -179,11 +187,11 @@
     font-weight: bold;
 }
 
-.matchEachSimple.lose + .matchEachDetail .matchEachDetailBtnWrap div.action {
+.matchEachSimple.lose+.matchEachDetail .matchEachDetailBtnWrap div.action {
     background-color: #b53737 !important;
 }
 
-.matchEachSimple.lose + .matchEachDetail .matchEachDetailBtnWrap div:hover {
+.matchEachSimple.lose+.matchEachDetail .matchEachDetailBtnWrap div:hover {
     background-color: #b53737 !important;
     color: white;
 }
@@ -195,6 +203,62 @@
     font-size: 15px;
     font-weight: bold;
     line-height: 2;
+}
+
+/* 스쿼드 탭 */
+.matchEachDetailSquadWrap {
+    display: flex;
+    flex-direction: row;
+}
+
+.squadMap {
+    position: relative;
+    width: 100%;
+    max-width: 532px;
+    aspect-ratio: 2.1 / 2;
+    background: url('/img/squadImg.png') no-repeat center center;
+    background-size: cover;
+    border-right: 2px solid #4e996c;
+}
+
+.squadPlayerWrap {
+    width: 221px;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.squadUserChoice {
+    display: flex;
+    justify-content: space-around;
+}
+
+.squadPlayerWrap .mySquad {
+    border-bottom: 1px solid #4e996c;
+    padding: 14px 31px;
+    border-right: 1px solid #4e996c;
+    cursor: pointer;
+}
+
+.squadPlayerWrap .mySquad.action {
+    background-color: #4e996c !important;
+}
+
+.matchEachSimple.lose+.matchEachDetail .matchEachDetailSquadWrap .squadPlayerWrap .squadUserChoice div.action {
+    background-color: #b53737 !important;
+}
+
+.squadPlayerWrap .otherSquad {
+    border-bottom: 1px solid #4e996c;
+    padding: 14px 27px;
+    cursor: pointer;
+}
+
+.squadPlayerWrap .otherSquad.action {
+    background-color: #4e996c !important;
+}
+
+.eachPlayerWrap {
+    display: flex
 }
 
 

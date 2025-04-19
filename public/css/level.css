@@ -1,0 +1,136 @@
+.en_level0 {
+    color: #c5c8c9 !important;
+    background: #51545a !important;
+    background: linear-gradient(140deg, #51545a 0%, #51545a 0%, #42464d 100%) !important;
+    border: 1.5px solid #393a3c !important;
+    border-top-color: #62676d !important;
+    border-left-color: #62676d !important;
+    border-right-color: #393a3c !important
+}
+
+.en_level1 {
+    color: #c5c8c9 !important;
+    background: #51545a !important;
+    background: linear-gradient(140deg, #51545a 0%, #51545a 0%, #42464d 100%) !important;
+    border: 1.5px solid #393a3c !important;
+    border-top-color: #62676d !important;
+    border-left-color: #62676d !important;
+    border-right-color: #393a3c !important
+}
+
+.en_level2 {
+    color: #7e3f27 !important;
+    background: #de946b !important;
+    background: linear-gradient(320deg, #de946b 0%, #de946b 0%, #ad5f42 100%) !important;
+    border: 1.5px solid #864229 !important;
+    border-top-color: #e4b7a2 !important;
+    border-left-color: #e4b7a2 !important;
+    border-right-color: #864229 !important
+}
+
+.en_level3 {
+    color: #7e3f27 !important;
+    background: #de946b !important;
+    background: linear-gradient(140deg, #de946b 0%, #de946b 0%, #ad5f42 100%) !important;
+    border: 1.5px solid #864229 !important;
+    border-top-color: #e4b7a2 !important;
+    border-left-color: #e4b7a2 !important;
+    border-right-color: #864229 !important
+}
+
+.en_level4 {
+    color: #7e3f27 !important;
+    background: #de946b !important;
+    background: linear-gradient(140deg, #de946b 0%, #de946b 0%, #ad5f42 100%) !important;
+    border: 1.5px solid #864229 !important;
+    border-top-color: #e4b7a2 !important;
+    border-left-color: #e4b7a2 !important;
+    border-right-color: #864229 !important
+}
+
+.en_level5 {
+    color: #4e545e !important;
+    background: #020024 !important;
+    background: linear-gradient(140deg, rgb(2, 0, 36) 0%, rgb(216, 217, 220) 0%, rgb(184, 189, 202) 100%) !important;
+    border: 1.5px solid #a5a8ae !important;
+    border-top-color: #d8dadc !important;
+    border-left-color: #d8dadc !important;
+    border-right-color: #a9aaae !important
+}
+
+.en_level6 {
+    color: #4e545e !important;
+    background: #020024 !important;
+    background: linear-gradient(140deg, rgb(2, 0, 36) 0%, rgb(216, 217, 220) 0%, rgb(184, 189, 202) 100%) !important;
+    border: 1.5px solid #a5a8ae !important;
+    border-top-color: #d8dadc !important;
+    border-left-color: #d8dadc !important;
+    border-right-color: #a9aaae !important
+}
+
+.en_level7 {
+    color: #4e545e !important;
+    background: #020024 !important;
+    background: linear-gradient(140deg, rgb(2, 0, 36) 0%, rgb(216, 217, 220) 0%, rgb(184, 189, 202) 100%) !important;
+    border: 1.5px solid #a5a8ae !important;
+    border-top-color: #d8dadc !important;
+    border-left-color: #d8dadc !important;
+    border-right-color: #a9aaae !important
+}
+
+.en_level8 {
+    color: #695100 !important;
+    background: #f9dd62 !important;
+    background: linear-gradient(140deg, #f9dd62 0%, #f9dd62 0%, #dca908 100%) !important;
+    border: 1.5px solid #cda000 !important;
+    border-top-color: #e9d36c !important;
+    border-left-color: #e9d36c !important;
+    border-right-color: #cda000 !important
+}
+
+.en_level9 {
+    color: #695100 !important;
+    background: #f9dd62 !important;
+    background: linear-gradient(140deg, #f9dd62 0%, #f9dd62 0%, #dca908 100%) !important;
+    border: 1.5px solid #cda000 !important;
+    border-top-color: #e9d36c !important;
+    border-left-color: #e9d36c !important;
+    border-right-color: #cda000 !important
+}
+
+.en_level10 {
+    color: #695100 !important;
+    background: #f9dd62 !important;
+    background: linear-gradient(140deg, #f9dd62 0%, #f9dd62 0%, #dca908 100%) !important;
+    border: 1.5px solid #cda000 !important;
+    border-top-color: #e9d36c !important;
+    border-left-color: #e9d36c !important;
+    border-right-color: #cda000 !important
+}
+
+.en_level11 {
+    color: #2d2b43 !important;
+    background: url(//ssl.nexon.com/s2/game/fc/online/obt/datacenter/bg_plt.png) no-repeat 0 0/100% 100% !important;
+    border: 1.5px solid #5274c0 !important;
+    border-top-color: #bdc5e5 !important;
+    border-left-color: #607dc4 !important;
+    border-right-color: #5274c0 !important
+}
+
+.en_level12 {
+    color: #2d2b43 !important;
+    background: url(//ssl.nexon.com/s2/game/fc/online/obt/datacenter/bg_plt.png) no-repeat 0 0/100% 100% !important;
+    border: 1.5px solid #5274c0 !important;
+    border-top-color: #bdc5e5 !important;
+    border-left-color: #607dc4 !important;
+    border-right-color: #5274c0 !important
+}
+
+.en_level13 {
+    color: #2d2b43 !important;
+    background: url(//ssl.nexon.com/s2/game/fc/online/obt/datacenter/bg_plt.png) no-repeat 0 0/100% 100% !important;
+    border: 1.5px solid #5274c0 !important;
+    border-top-color: #bdc5e5 !important;
+    border-left-color: #607dc4 !important;
+    border-right-color: #5274c0 !important
+}
