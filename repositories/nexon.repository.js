@@ -125,7 +125,7 @@ class nexonRepository {
 
             const flatResult = {
                 ...result.toJSON(),
-                seasonName: result.Season?.season_name,
+                seasonName: result.Season?.seasonName,
                 img: result.Season?.img,
             };
 

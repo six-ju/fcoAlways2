@@ -42,7 +42,7 @@ $(document).ready(function () {
     });
 
     // 상세정보보 클릭시
-    $('.matchDetail').click(function () {
+    $(document).on('click', '.matchDetail', function () {
         $(this).siblings().removeClass('action');
         $(this).addClass('action');
 
@@ -52,7 +52,7 @@ $(document).ready(function () {
     });
 
     // 스쿼드 클릭시
-    $('.matchSquad').click(function () {
+    $(document).on('click', '.matchSquad', function () {
         $(this).siblings().removeClass('action');
         $(this).addClass('action');
 
@@ -63,7 +63,7 @@ $(document).ready(function () {
     });
 
     // 스쿼드내 유저 클릭시(나)
-    $('.mySquad').click(function () {
+    $(document).on('click', '.mySquad', function () {
         $(this).siblings().removeClass('action');
         $(this).addClass('action');
 
@@ -74,7 +74,7 @@ $(document).ready(function () {
     });
 
     // 스쿼드내 유저 클릭시(상대대)
-    $('.otherSquad').click(function () {
+    $(document).on('click', '.otherSquad', function () {
         $(this).siblings().removeClass('action');
         $(this).addClass('action');
 
@@ -85,7 +85,7 @@ $(document).ready(function () {
     });
     
     // 선수평가가 클릭시
-    $('.matchPlayerAvg').click(function () {
+    $(document).on('click', '.matchPlayerAvg', function () {
         $(this).siblings().removeClass('action');
         $(this).addClass('action');
 
@@ -265,70 +265,70 @@ function searchMatch(nickName) {
                                                 </div>
                                                 <div class="squadPlayer">
                                                     <div class="eachPlayerWrap">
-                                                        <div class="eachPlayerSeason">${userInfo.player[0].spId.slice(0,3)}</div>
-                                                        <div class="eachPlayerGrade">${userInfo.player[0].spGrade}</div>
-                                                        <div class="eachPlayerName">${userInfo.player[0].spId.slice(4)}</div>
-                                                        <div class="eachPlayerAvg">${userInfo.player[0].staus.spRating}</div>
+                                                        <div class="eachPlayerSeason">${userInfo.player[0].playerName}</div>
+                                                        <div class="eachPlayerGrade en_level${userInfo.player[0].spGrade}">${userInfo.player[0].spGrade}</div>
+                                                        <div class="eachPlayerName s${userInfo.player[0].seasonImg.split('season/')[1].split('.')[0]}"></div>
+                                                        <div class="eachPlayerAvg">${userInfo.player[0].status.spRating}</div>
                                                     </div>
                                                     <div class="eachPlayerWrap">
-                                                        <div class="eachPlayerSeason">${userInfo.player[1].spId.slice(0,3)}</div>
-                                                        <div class="eachPlayerGrade">${userInfo.player[1].spGrade}</div>
-                                                        <div class="eachPlayerName">${userInfo.player[1].spId.slice(4)}</div>
-                                                        <div class="eachPlayerAvg">${userInfo.player[1].staus.spRating}</div>
+                                                        <div class="eachPlayerSeason">${userInfo.player[1].playerName}</div>
+                                                        <div class="eachPlayerGrade  en_level${userInfo.player[1].spGrade}">${userInfo.player[1].spGrade}</div>
+                                                        <div class="eachPlayerName  s${userInfo.player[1].seasonImg.split('season/')[1].split('.')[0]}"></div>
+                                                        <div class="eachPlayerAvg">${userInfo.player[1].status.spRating}</div>
                                                     </div>
                                                     <div class="eachPlayerWrap">
-                                                        <div class="eachPlayerSeason">${userInfo.player[2].spId.slice(0,3)}</div>
-                                                        <div class="eachPlayerGrade">${userInfo.player[2].spGrade}</div>
-                                                        <div class="eachPlayerName">${userInfo.player[2].spId.slice(4)}</div>
-                                                        <div class="eachPlayerAvg">${userInfo.player[2].staus.spRating}</div>
+                                                        <div class="eachPlayerSeason">${userInfo.player[2].playerName}</div>
+                                                        <div class="eachPlayerGrade  en_level${userInfo.player[2].spGrade}">${userInfo.player[2].spGrade}</div>
+                                                        <div class="eachPlayerName  s${userInfo.player[2].seasonImg.split('season/')[1].split('.')[0]}"></div>
+                                                        <div class="eachPlayerAvg">${userInfo.player[2].status.spRating}</div>
                                                     </div>
                                                     <div class="eachPlayerWrap">
-                                                        <div class="eachPlayerSeason">${userInfo.player[3].spId.slice(0,3)}</div>
-                                                        <div class="eachPlayerGrade">${userInfo.player[3].spGrade}</div>
-                                                        <div class="eachPlayerName">${userInfo.player[3].spId.slice(4)}</div>
-                                                        <div class="eachPlayerAvg">${userInfo.player[3].staus.spRating}</div>
+                                                        <div class="eachPlayerSeason">${userInfo.player[3].playerName}</div>
+                                                        <div class="eachPlayerGrade  en_level${userInfo.player[3].spGrade}">${userInfo.player[3].spGrade}</div>
+                                                        <div class="eachPlayerName  s${userInfo.player[3].seasonImg.split('season/')[1].split('.')[0]}"></div>
+                                                        <div class="eachPlayerAvg">${userInfo.player[3].status.spRating}</div>
                                                     </div>
                                                     <div class="eachPlayerWrap">
-                                                        <div class="eachPlayerSeason">${userInfo.player[4].spId.slice(0,3)}</div>
-                                                        <div class="eachPlayerGrade">${userInfo.player[4].spGrade}</div>
-                                                        <div class="eachPlayerName">${userInfo.player[4].spId.slice(4)}</div>
-                                                        <div class="eachPlayerAvg">${userInfo.player[4].staus.spRating}</div>
+                                                        <div class="eachPlayerSeason">${userInfo.player[4].playerName}</div>
+                                                        <div class="eachPlayerGrade  en_level${userInfo.player[4].spGrade}">${userInfo.player[4].spGrade}</div>
+                                                        <div class="eachPlayerName  s${userInfo.player[4].seasonImg.split('season/')[1].split('.')[0]}"></div>
+                                                        <div class="eachPlayerAvg">${userInfo.player[4].status.spRating}</div>
                                                     </div>
                                                     <div class="eachPlayerWrap">
-                                                        <div class="eachPlayerSeason">${userInfo.player[5].spId.slice(0,3)}</div>
-                                                        <div class="eachPlayerGrade">${userInfo.player[5].spGrade}</div>
-                                                        <div class="eachPlayerName">${userInfo.player[5].spId.slice(4)}</div>
-                                                        <div class="eachPlayerAvg">${userInfo.player[5].staus.spRating}</div>
+                                                        <div class="eachPlayerSeason">${userInfo.player[5].playerName}</div>
+                                                        <div class="eachPlayerGrade  en_level${userInfo.player[5].spGrade}">${userInfo.player[5].spGrade}</div>
+                                                        <div class="eachPlayerName  s${userInfo.player[5].seasonImg.split('season/')[1].split('.')[0]}"></div>
+                                                        <div class="eachPlayerAvg">${userInfo.player[5].status.spRating}</div>
                                                     </div>
                                                     <div class="eachPlayerWrap">
-                                                        <div class="eachPlayerSeason">${userInfo.player[6].spId.slice(0,3)}</div>
-                                                        <div class="eachPlayerGrade">${userInfo.player[6].spGrade}</div>
-                                                        <div class="eachPlayerName">${userInfo.player[6].spId.slice(4)}</div>
-                                                        <div class="eachPlayerAvg">${userInfo.player[6].staus.spRating}</div>
+                                                        <div class="eachPlayerSeason">${userInfo.player[6].playerName}</div>
+                                                        <div class="eachPlayerGrade  en_level${userInfo.player[6].spGrade}">${userInfo.player[6].spGrade}</div>
+                                                        <div class="eachPlayerName  s${userInfo.player[6].seasonImg.split('season/')[1].split('.')[0]}"></div>
+                                                        <div class="eachPlayerAvg">${userInfo.player[6].status.spRating}</div>
                                                     </div>
                                                     <div class="eachPlayerWrap">
-                                                        <div class="eachPlayerSeason">${userInfo.player[7].spId.slice(0,3)}</div>
-                                                        <div class="eachPlayerGrade">${userInfo.player[7].spGrade}</div>
-                                                        <div class="eachPlayerName">${userInfo.player[7].spId.slice(4)}</div>
-                                                        <div class="eachPlayerAvg">${userInfo.player[7].staus.spRating}</div>
+                                                        <div class="eachPlayerSeason">${userInfo.player[7].playerName}</div>
+                                                        <div class="eachPlayerGrade  en_level${userInfo.player[7].spGrade}">${userInfo.player[7].spGrade}</div>
+                                                        <div class="eachPlayerName  s${userInfo.player[7].seasonImg.split('season/')[1].split('.')[0]}"></div>
+                                                        <div class="eachPlayerAvg">${userInfo.player[7].status.spRating}</div>
                                                     </div>
                                                     <div class="eachPlayerWrap">
-                                                        <div class="eachPlayerSeason">${userInfo.player[8].spId.slice(0,3)}</div>
-                                                        <div class="eachPlayerGrade">${userInfo.player[8].spGrade}</div>
-                                                        <div class="eachPlayerName">${userInfo.player[8].spId.slice(4)}</div>
-                                                        <div class="eachPlayerAvg">${userInfo.player[8].staus.spRating}</div>
+                                                        <div class="eachPlayerSeason">${userInfo.player[8].playerName}</div>
+                                                        <div class="eachPlayerGrade  en_level${userInfo.player[8].spGrade}">${userInfo.player[8].spGrade}</div>
+                                                        <div class="eachPlayerName  s${userInfo.player[8].seasonImg.split('season/')[1].split('.')[0]}"></div>
+                                                        <div class="eachPlayerAvg">${userInfo.player[8].status.spRating}</div>
                                                     </div>
                                                     <div class="eachPlayerWrap">
-                                                        <div class="eachPlayerSeason">${userInfo.player[9].spId.slice(0,3)}</div>
-                                                        <div class="eachPlayerGrade">${userInfo.player[9].spGrade}</div>
-                                                        <div class="eachPlayerName">${userInfo.player[9].spId.slice(4)}</div>
-                                                        <div class="eachPlayerAvg">${userInfo.player[9].staus.spRating}</div>
+                                                        <div class="eachPlayerSeason">${userInfo.player[9].playerName}</div>
+                                                        <div class="eachPlayerGrade  en_level${userInfo.player[9].spGrade}">${userInfo.player[9].spGrade}</div>
+                                                        <div class="eachPlayerName  s${userInfo.player[9].seasonImg.split('season/')[1].split('.')[0]}"></div>
+                                                        <div class="eachPlayerAvg">${userInfo.player[9].status.spRating}</div>
                                                     </div>
                                                     <div class="eachPlayerWrap">
-                                                        <div class="eachPlayerSeason">${userInfo.player[10].spId.slice(0,3)}</div>
-                                                        <div class="eachPlayerGrade">${userInfo.player[10].spGrade}</div>
-                                                        <div class="eachPlayerName">${userInfo.player[10].spId.slice(4)}</div>
-                                                        <div class="eachPlayerAvg">${userInfo.player[10].staus.spRating}</div>
+                                                        <div class="eachPlayerSeason">${userInfo.player[10].playerName}</div>
+                                                        <div class="eachPlayerGrade  en_level${userInfo.player[10].spGrade}">${userInfo.player[10].spGrade}</div>
+                                                        <div class="eachPlayerName  s${userInfo.player[10].seasonImg.split('season/')[1].split('.')[0]}"></div>
+                                                        <div class="eachPlayerAvg">${userInfo.player[10].status.spRating}</div>
                                                     </div>
                                                 </div>
                                             </div>

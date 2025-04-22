@@ -113,10 +113,10 @@ class nexonService {
                 // await sleep(80); // 100ms 쉬고 다음 요청
             }
 
-            matchDetailResult.map(async (data) => {
+            for (const data of matchDetailResult) {
                 data[1][0].player.sort((a, b) => a.spPosition - b.spPosition);
                 data[1][1].player.sort((a, b) => a.spPosition - b.spPosition);
-
+            
                 await Promise.all(
                     data[1][0].player.map(async (player) => {
                         if (player.spPosition !== 28) {
@@ -129,9 +129,9 @@ class nexonService {
                             player.seasonName = playerDetailInfo.seasonName;
                             player.seasonImg = playerDetailInfo.img;
                         }
-                    }),
+                    })
                 );
-
+            
                 await Promise.all(
                     data[1][1].player.map(async (player) => {
                         if (player.spPosition !== 28) {
@@ -139,15 +139,16 @@ class nexonService {
                             const playerDetailInfo = await this.nexonRepository.getPlayerInfoByspId(
                                 String(player.spId),
                             );
+
                             player.playerName = playerDetailInfo.playerName;
                             player.playerImg = playerDetailInfo.playerImg;
                             player.seasonName = playerDetailInfo.seasonName;
                             player.seasonImg = playerDetailInfo.img;
                         }
-                    }),
+                    })
                 );
-            });
-            console.log(matchDetailResult);
+            }
+            
             return matchDetailResult;
         } catch (error) {
             console.error('Error fetching match details:', error);
