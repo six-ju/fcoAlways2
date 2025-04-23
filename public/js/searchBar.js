@@ -200,20 +200,20 @@ function searchMatch(nickName) {
                         const gradeClassOther = `en_level${pOther?.spGrade}`;
                 
                         squadMapHTML += `
-                            <div class="playerSeasonAndGrade fieldPlayer" data-position="${p.spPosition}">
+                            <div class="playerSeasonAndGrade fieldPlayer" data-position="${p?.spPosition}">
                                 <img  src="https://fco.dn.nexoncdn.co.kr/live/externalAssets/common/players/p${imgId}.png"/>
                                 <div class="seasonAndGradeWrap">
                                     <div class="eachPlayerName ${seasonClass}"></div>
-                                    <div class="eachPlayerGrade ${gradeClass}">${p.spGrade}</div>
+                                    <div class="eachPlayerGrade ${gradeClass}">${p?.spGrade}</div>
                                 </div>
                             </div>
                         `;
                 
                         squadPlayerHTML += `
                             <div class="eachPlayerWrap">
-                                <div class="eachPlayerPosition">${p.spPosition}</div>
-                                <div class="eachPlayerSeason">${p.playerName}</div>
-                                <div class="eachPlayerAvg">${p.status.spRating}</div>
+                                <div class="eachPlayerPosition">${p?.spPosition}</div>
+                                <div class="eachPlayerSeason">${p?.playerName}</div>
+                                <div class="eachPlayerAvg">${p?.status.spRating}</div>
                             </div>
                         `;
 
