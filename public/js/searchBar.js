@@ -46,9 +46,11 @@ $(document).ready(function () {
         $(this).siblings().removeClass('action');
         $(this).addClass('action');
 
+        const $InfoWrap = $(this).closest('.matchEachDetailBtnWrap').siblings('.matchEachDetailInfoWrap')
+        const $SquadWrap = $(this).closest('.matchEachDetailBtnWrap').siblings('.matchEachDetailSquadWrap')
         // 컨텐츠 영역 숨김과 보임처리
-        $('.matchEachDetailInfoWrap').css('display','flex')
-        $('.matchEachDetailSquadWrap').css('display','none')
+        $InfoWrap.css('display','flex')
+        $SquadWrap.css('display','none')
     });
 
     // 스쿼드 클릭시
@@ -56,9 +58,12 @@ $(document).ready(function () {
         $(this).siblings().removeClass('action');
         $(this).addClass('action');
 
+        const $InfoWrap = $(this).closest('.matchEachDetailBtnWrap').siblings('.matchEachDetailInfoWrap')
+        const $SquadWrap = $(this).closest('.matchEachDetailBtnWrap').siblings('.matchEachDetailSquadWrap')
+
         // 컨텐츠 영역 숨김과 보임처리
-        $('.matchEachDetailInfoWrap').css('display','none')
-        $('.matchEachDetailSquadWrap').css('display','flex')
+        $InfoWrap.css('display','none')
+        $SquadWrap.css('display','flex')
 
     });
 
@@ -94,6 +99,8 @@ $(document).ready(function () {
     // 간단 정보를 클릭시 액션
     $(document).on('click', '.matchEachSimple', function () {
         const $detail = $(this).next();
+        const $InfoWrap = $(this).closest('.matchEachDetailBtnWrap').siblings('.matchEachDetailInfoWrap')
+        const $SquadWrap = $(this).closest('.matchEachDetailBtnWrap').siblings('.matchEachDetailSquadWrap')
 
         const isOpen = $detail.hasClass('show');
 
@@ -107,7 +114,7 @@ $(document).ready(function () {
             $detail.find('.matchEachDetailBtnWrap').find('.matchPlayerAvg').removeClass('action');
 
             $detail.removeClass('show').stop().slideUp(100);
-            $('.matchEachDetailInfoWrap').css('display','flex')
+            $detail.find('.matchEachDetailInfoWrap').css('display','flex')
 
         } else {
             $(this).css({ 'margin-bottom': '0px', 'border-radius': '25px 25px 0 0' });
@@ -116,7 +123,7 @@ $(document).ready(function () {
             // 버튼 색채우기
             $detail.find('.matchEachDetailBtnWrap').find('.matchDetail').addClass('action');
 
-            $('.matchEachDetailSquadWrap').css('display','none')
+            $detail.find('.matchEachDetailSquadWrap').css('display','none')
             $detail.addClass('show').stop().slideDown(100);
         }
     });
@@ -176,6 +183,58 @@ function searchMatch(nickName) {
                     const otherMatchResult = otherInfo.matchDetail.matchResult;
                     const userMatchScore = userInfo.shoot.goalTotal;
                     const otherMatchScore = otherInfo.shoot.goalTotal;
+
+                    let squadMapHTML = '';
+                    let squadPlayerHTML = '';
+                    let squadOtherMapHTML = '';
+                    let squadOtherPlayerHTML = '';
+                
+                    for (let i = 0; i <= 10; i++) {
+                        const p = userInfo.player[i];
+                        const pOther = otherInfo.player[i];
+                        const imgId = parseInt(p?.spId.toString().slice(3));
+                        const seasonClass = `s${p?.seasonImg.split('season/')[1].split('.')[0]}`;
+                        const gradeClass = `en_level${p?.spGrade}`;
+                        const imgIdOther = parseInt(pOther?.spId.toString().slice(3));
+                        const seasonClassOther = `s${pOther?.seasonImg.split('season/')[1].split('.')[0]}`;
+                        const gradeClassOther = `en_level${pOther?.spGrade}`;
+                
+                        squadMapHTML += `
+                            <div class="playerSeasonAndGrade fieldPlayer" data-position="${p.spPosition}">
+                                <img  src="https://fco.dn.nexoncdn.co.kr/live/externalAssets/common/players/p${imgId}.png"/>
+                                <div class="seasonAndGradeWrap">
+                                    <div class="eachPlayerName ${seasonClass}"></div>
+                                    <div class="eachPlayerGrade ${gradeClass}">${p.spGrade}</div>
+                                </div>
+                            </div>
+                        `;
+                
+                        squadPlayerHTML += `
+                            <div class="eachPlayerWrap">
+                                <div class="eachPlayerPosition">${p.spPosition}</div>
+                                <div class="eachPlayerSeason">${p.playerName}</div>
+                                <div class="eachPlayerAvg">${p.status.spRating}</div>
+                            </div>
+                        `;
+
+                        squadOtherMapHTML += `
+                            <div class="playerSeasonAndGrade fieldPlayer"  data-position="${pOther?.spPosition}">
+                                <img src="https://fco.dn.nexoncdn.co.kr/live/externalAssets/common/players/p${imgIdOther}.png"/>
+                                <div class="seasonAndGradeWrap">
+                                    <div class="eachPlayerName ${seasonClassOther}"></div>
+                                    <div class="eachPlayerGrade ${gradeClassOther}">${pOther?.spGrade}</div>
+                                </div>
+                            </div>
+                        `;
+                
+                        squadOtherPlayerHTML += `
+                            <div class="eachPlayerWrap">
+                                <div class="eachPlayerPosition">${pOther?.spPosition}</div>
+                                <div class="eachPlayerSeason">${pOther?.playerName}</div>
+                                <div class="eachPlayerAvg">${pOther?.status.spRating}</div>
+                            </div>
+                        `;
+                    }
 
                     list += `
                         <div class="matchEachInfo ">
@@ -257,6 +316,7 @@ function searchMatch(nickName) {
                                         </div>
                                         <div class="matchEachDetailSquadWrap">
                                             <div class="squadMap">
+                                            ${squadMapHTML}
                                             </div>
                                             <div class="squadPlayerWrap">
                                                 <div class="squadUserChoice">
@@ -264,72 +324,7 @@ function searchMatch(nickName) {
                                                     <div class="otherSquad">${otherInfo.nickname}</div>
                                                 </div>
                                                 <div class="squadPlayer">
-                                                    <div class="eachPlayerWrap">
-                                                        <div class="eachPlayerSeason">${userInfo.player[0].playerName}</div>
-                                                        <div class="eachPlayerGrade en_level${userInfo.player[0].spGrade}">${userInfo.player[0].spGrade}</div>
-                                                        <div class="eachPlayerName s${userInfo.player[0].seasonImg.split('season/')[1].split('.')[0]}"></div>
-                                                        <div class="eachPlayerAvg">${userInfo.player[0].status.spRating}</div>
-                                                    </div>
-                                                    <div class="eachPlayerWrap">
-                                                        <div class="eachPlayerSeason">${userInfo.player[1].playerName}</div>
-                                                        <div class="eachPlayerGrade  en_level${userInfo.player[1].spGrade}">${userInfo.player[1].spGrade}</div>
-                                                        <div class="eachPlayerName  s${userInfo.player[1].seasonImg.split('season/')[1].split('.')[0]}"></div>
-                                                        <div class="eachPlayerAvg">${userInfo.player[1].status.spRating}</div>
-                                                    </div>
-                                                    <div class="eachPlayerWrap">
-                                                        <div class="eachPlayerSeason">${userInfo.player[2].playerName}</div>
-                                                        <div class="eachPlayerGrade  en_level${userInfo.player[2].spGrade}">${userInfo.player[2].spGrade}</div>
-                                                        <div class="eachPlayerName  s${userInfo.player[2].seasonImg.split('season/')[1].split('.')[0]}"></div>
-                                                        <div class="eachPlayerAvg">${userInfo.player[2].status.spRating}</div>
-                                                    </div>
-                                                    <div class="eachPlayerWrap">
-                                                        <div class="eachPlayerSeason">${userInfo.player[3].playerName}</div>
-                                                        <div class="eachPlayerGrade  en_level${userInfo.player[3].spGrade}">${userInfo.player[3].spGrade}</div>
-                                                        <div class="eachPlayerName  s${userInfo.player[3].seasonImg.split('season/')[1].split('.')[0]}"></div>
-                                                        <div class="eachPlayerAvg">${userInfo.player[3].status.spRating}</div>
-                                                    </div>
-                                                    <div class="eachPlayerWrap">
-                                                        <div class="eachPlayerSeason">${userInfo.player[4].playerName}</div>
-                                                        <div class="eachPlayerGrade  en_level${userInfo.player[4].spGrade}">${userInfo.player[4].spGrade}</div>
-                                                        <div class="eachPlayerName  s${userInfo.player[4].seasonImg.split('season/')[1].split('.')[0]}"></div>
-                                                        <div class="eachPlayerAvg">${userInfo.player[4].status.spRating}</div>
-                                                    </div>
-                                                    <div class="eachPlayerWrap">
-                                                        <div class="eachPlayerSeason">${userInfo.player[5].playerName}</div>
-                                                        <div class="eachPlayerGrade  en_level${userInfo.player[5].spGrade}">${userInfo.player[5].spGrade}</div>
-                                                        <div class="eachPlayerName  s${userInfo.player[5].seasonImg.split('season/')[1].split('.')[0]}"></div>
-                                                        <div class="eachPlayerAvg">${userInfo.player[5].status.spRating}</div>
-                                                    </div>
-                                                    <div class="eachPlayerWrap">
-                                                        <div class="eachPlayerSeason">${userInfo.player[6].playerName}</div>
-                                                        <div class="eachPlayerGrade  en_level${userInfo.player[6].spGrade}">${userInfo.player[6].spGrade}</div>
-                                                        <div class="eachPlayerName  s${userInfo.player[6].seasonImg.split('season/')[1].split('.')[0]}"></div>
-                                                        <div class="eachPlayerAvg">${userInfo.player[6].status.spRating}</div>
-                                                    </div>
-                                                    <div class="eachPlayerWrap">
-                                                        <div class="eachPlayerSeason">${userInfo.player[7].playerName}</div>
-                                                        <div class="eachPlayerGrade  en_level${userInfo.player[7].spGrade}">${userInfo.player[7].spGrade}</div>
-                                                        <div class="eachPlayerName  s${userInfo.player[7].seasonImg.split('season/')[1].split('.')[0]}"></div>
-                                                        <div class="eachPlayerAvg">${userInfo.player[7].status.spRating}</div>
-                                                    </div>
-                                                    <div class="eachPlayerWrap">
-                                                        <div class="eachPlayerSeason">${userInfo.player[8].playerName}</div>
-                                                        <div class="eachPlayerGrade  en_level${userInfo.player[8].spGrade}">${userInfo.player[8].spGrade}</div>
-                                                        <div class="eachPlayerName  s${userInfo.player[8].seasonImg.split('season/')[1].split('.')[0]}"></div>
-                                                        <div class="eachPlayerAvg">${userInfo.player[8].status.spRating}</div>
-                                                    </div>
-                                                    <div class="eachPlayerWrap">
-                                                        <div class="eachPlayerSeason">${userInfo.player[9].playerName}</div>
-                                                        <div class="eachPlayerGrade  en_level${userInfo.player[9].spGrade}">${userInfo.player[9].spGrade}</div>
-                                                        <div class="eachPlayerName  s${userInfo.player[9].seasonImg.split('season/')[1].split('.')[0]}"></div>
-                                                        <div class="eachPlayerAvg">${userInfo.player[9].status.spRating}</div>
-                                                    </div>
-                                                    <div class="eachPlayerWrap">
-                                                        <div class="eachPlayerSeason">${userInfo.player[10].playerName}</div>
-                                                        <div class="eachPlayerGrade  en_level${userInfo.player[10].spGrade}">${userInfo.player[10].spGrade}</div>
-                                                        <div class="eachPlayerName  s${userInfo.player[10].seasonImg.split('season/')[1].split('.')[0]}"></div>
-                                                        <div class="eachPlayerAvg">${userInfo.player[10].status.spRating}</div>
-                                                    </div>
+                                                ${squadPlayerHTML}
                                                 </div>
                                             </div>
                                         </div>
