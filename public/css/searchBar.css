@@ -87,7 +87,7 @@
     background-color: white;
 }
 
-.userInfoWrap>div {
+.userInfoWrap > div {
     width: 147px;
     display: flex;
 }
@@ -146,7 +146,7 @@
     border-top: 0;
 }
 
-.matchEachSimple.lose+.matchEachDetail {
+.matchEachSimple.lose + .matchEachDetail {
     border: 1px solid #b53737;
     border-top: 0;
 }
@@ -179,7 +179,7 @@
     color: white;
 }
 
-.matchEachSimple.lose+.matchEachDetail .matchEachDetailBtnWrap div {
+.matchEachSimple.lose + .matchEachDetail .matchEachDetailBtnWrap div {
     border-bottom: 1px solid #b53737 !important;
     width: 253px;
     padding: 17px;
@@ -187,11 +187,11 @@
     font-weight: bold;
 }
 
-.matchEachSimple.lose+.matchEachDetail .matchEachDetailBtnWrap div.action {
+.matchEachSimple.lose + .matchEachDetail .matchEachDetailBtnWrap div.action {
     background-color: #b53737 !important;
 }
 
-.matchEachSimple.lose+.matchEachDetail .matchEachDetailBtnWrap div:hover {
+.matchEachSimple.lose + .matchEachDetail .matchEachDetailBtnWrap div:hover {
     background-color: #b53737 !important;
     color: white;
 }
@@ -222,7 +222,7 @@
 }
 
 .squadPlayerWrap {
-    width: 221px;
+    width: 224px;
     font-size: 17px;
     font-weight: bold;
 }
@@ -233,24 +233,38 @@
 }
 
 .squadPlayerWrap .mySquad {
-    border-bottom: 1px solid #4e996c;
+    border-bottom: 1px solid black;
     padding: 14px 31px;
-    border-right: 1px solid #4e996c;
+    border-right: 1px solid black;
     cursor: pointer;
+    width: 60px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .squadPlayerWrap .mySquad.action {
     background-color: #4e996c !important;
 }
 
-.matchEachSimple.lose+.matchEachDetail .matchEachDetailSquadWrap .squadPlayerWrap .squadUserChoice div.action {
+.matchEachSimple.lose
+    + .matchEachDetail
+    .matchEachDetailSquadWrap
+    .squadPlayerWrap
+    .squadUserChoice
+    div.action {
     background-color: #b53737 !important;
+    border-bottom: 1px solid #b53737;
 }
 
 .squadPlayerWrap .otherSquad {
     border-bottom: 1px solid #4e996c;
     padding: 14px 27px;
     cursor: pointer;
+    width: 68px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .squadPlayerWrap .otherSquad.action {
@@ -258,9 +272,44 @@
 }
 
 .eachPlayerWrap {
-    display: flex
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px 5px;
 }
 
+.eachPlayerName {
+    width: 52px;
+}
 
+.eachPlayerGrade {
+    width: 37px;
+    font-weight: bold;
+}
+
+.eachPlayerStWrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.playerSeasonAndGrade {
+    display: flex;
+    flex-direction: column;
+    width: 53px;
+}
+
+.fieldPlayer {
+    width: 70px;
+}
+
+.fieldPlayer .seasonAndGradeWrap .eachPlayerName{
+    height: 22px;
+}
+
+.seasonAndGradeWrap {
+    display: flex;
+    align-items: center;
+}
 /* 추후 그라데이션 추가를 위해서
 background-image: linear-gradient(to top, #b53737 0%, #ffc8c8 100%); */

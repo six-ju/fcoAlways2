@@ -1,6 +1,6 @@
 const nexonRepository = require('../repositories/nexon.repository');
 const { default: axios } = require('axios');
-const { MATCH_TYPE, DIVISION } = require('../config/variables');
+const { MATCH_TYPE, DIVISION, POSITION } = require('../config/variables');
 const dayjs = require('dayjs');
 const { sleep } = require('../utills/common');
 const startUrl = process.env.NEXON_API_START_URL;
@@ -110,13 +110,45 @@ class nexonService {
                 );
                 matchDetailResult.push([detailData.data.matchDate, detailData.data.matchInfo]);
 
-                await sleep(80); // 100ms 쉬고 다음 요청
+                // await sleep(80); // 100ms 쉬고 다음 요청
             }
 
-            // matchDetailResult.map((data, index) => {
-            //     const userInfo = 
-            // })
+            for (const data of matchDetailResult) {
+                data[1][0].player.sort((a, b) => a.spPosition - b.spPosition);
+                data[1][1].player.sort((a, b) => a.spPosition - b.spPosition);
+            
+                await Promise.all(
+                    data[1][0].player.map(async (player) => {
+                        if (player.spPosition !== 28) {
+                            player.spPosition = POSITION[player.spPosition];
+                            const playerDetailInfo = await this.nexonRepository.getPlayerInfoByspId(
+                                String(player.spId),
+                            );
+                            player.playerName = playerDetailInfo.playerName;
+                            player.playerImg = playerDetailInfo.playerImg;
+                            player.seasonName = playerDetailInfo.seasonName;
+                            player.seasonImg = playerDetailInfo.img;
+                        }
+                    })
+                );
+            
+                await Promise.all(
+                    data[1][1].player.map(async (player) => {
+                        if (player.spPosition !== 28) {
+                            player.spPosition = POSITION[player.spPosition];
+                            const playerDetailInfo = await this.nexonRepository.getPlayerInfoByspId(
+                                String(player.spId),
+                            );
 
+                            player.playerName = playerDetailInfo.playerName;
+                            player.playerImg = playerDetailInfo.playerImg;
+                            player.seasonName = playerDetailInfo.seasonName;
+                            player.seasonImg = playerDetailInfo.img;
+                        }
+                    })
+                );
+            }
+            
             return matchDetailResult;
         } catch (error) {
             console.error('Error fetching match details:', error);

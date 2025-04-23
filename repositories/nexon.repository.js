@@ -1,5 +1,5 @@
 const { Op } = require('sequelize');
-const { User, Player, Season } = require('../models');
+const { User, Player, Season, sequelize } = require('../models');
 
 class nexonRepository {
     // API 호출된 ouid 저장
@@ -102,6 +102,34 @@ class nexonRepository {
                 );
                 console.log(`✅ ${i + chunk.length}/${getPlayers.length} 건 삽입됨`);
             }
+        } catch (error) {
+            console.error('Error finding or creating user:', error);
+        }
+    };
+
+    // 선수 디테일 정보 가져오기
+    getPlayerInfoByspId = async (spid) => {
+        try {
+            const result = await Player.findOne({
+                where: {
+                    season_id: spid.slice(0, 3),
+                    player_id: spid.slice(3),
+                },
+                include: [
+                    {
+                        model: Season,
+                        attributes: ['seasonName','img'],
+                    },
+                ],
+            });
+
+            const flatResult = {
+                ...result.toJSON(),
+                seasonName: result.Season?.seasonName,
+                img: result.Season?.img,
+            };
+
+            return flatResult;
         } catch (error) {
             console.error('Error finding or creating user:', error);
         }
