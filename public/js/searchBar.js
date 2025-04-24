@@ -3,6 +3,53 @@ $(document).ready(async function () {
 
     searchMatch(saveSearchNickName)
 
+    const playerStatus = {
+        shoot: 72,
+        pass: 85,
+        defending: 60,
+        dribble: 80,
+        speed: 90,
+        stamina: 75
+    };
+
+    const labels = ['슛', '패스', '수비', '드리블', '스피드', '체력'];
+    const data = [
+        playerStatus.shoot,
+        playerStatus.pass,
+        playerStatus.defending,
+        playerStatus.dribble,
+        playerStatus.speed,
+        playerStatus.stamina
+    ];
+
+    const ctx = $('#playerRadarChart');
+    new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: '선수 능력치',
+                data: data,
+                fill: true,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                pointBackgroundColor: 'rgba(75, 192, 192, 1)'
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                r: {
+                    min: 0,
+                    max: 100
+                }
+            }
+        }
+    });
+    
     // 공식경기 전적 조회
     $('.officialSearchBtn').click(function () {
         searchMatch(saveSearchNickName)
@@ -81,8 +128,18 @@ $(document).ready(async function () {
 
     // 선수평가가 클릭시
     $(document).on('click', '.matchPlayerAvg', function () {
-        $(this).siblings().removeClass('action');
-        $(this).addClass('action');
+        const $this = $(this)
+        $this.siblings().removeClass('action');
+        $this.addClass('action');
+
+        matchEachPlayerDetailWrap
+        // 컨텐츠 영역 숨김과 보임처리
+        // 스쿼드
+        $this.closest('.squadUserChoice').closest('.squadPlayerWrap').prev('.squadMap').find('.otherSquadPlayerList').removeClass('hide')
+        $this.closest('.squadUserChoice').closest('.squadPlayerWrap').prev('.squadMap').find('.ownerSquadPlayerList').addClass('hide')
+        // 선수단
+        $this.closest('.squadPlayerWrap').find('.squadPlayer').find('.otherPlayerList').removeClass('hide')
+        $this.closest('.squadPlayerWrap').find('.squadPlayer').find('.ownerPlayerList').addClass('hide')
     });
 
     // 간단 정보를 클릭시 액션

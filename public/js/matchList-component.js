@@ -13,6 +13,7 @@ function matchListComponent(data, nickName){
         let squadPlayerHTML = '';
         let squadOtherMapHTML = '';
         let squadOtherPlayerHTML = '';
+        let playerDetailAvg = '';
 
         for (let i = 0; i <= 10; i++) {
             const p = userInfo.player[i];
@@ -81,6 +82,13 @@ function matchListComponent(data, nickName){
                     <div class="eachPlayerAvg">${pOther?.status.spRating}</div>
                 </div>
             `;
+
+            playerDetailAvg += `
+                <div class="circleChart" data-percent="75">
+                <span class="percentText">75%</span>
+                </div>
+            `
+
         }
 
         list += `
@@ -197,11 +205,15 @@ function matchListComponent(data, nickName){
                                     </div>
                                 </div>
                             </div>
+                            
                         </div>
                     </div>
                 </div>
             </div>
         `;
     });
+    // <div class="matchEachPlayerDetailWrap">
+    //                             <canvas id="playerRadarChart" width="300" height="300"></canvas>
+    //                         </div>
     return list
 }
