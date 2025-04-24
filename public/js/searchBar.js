@@ -46,11 +46,15 @@ $(document).ready(function () {
         $(this).siblings().removeClass('action');
         $(this).addClass('action');
 
-        const $InfoWrap = $(this).closest('.matchEachDetailBtnWrap').siblings('.matchEachDetailInfoWrap')
-        const $SquadWrap = $(this).closest('.matchEachDetailBtnWrap').siblings('.matchEachDetailSquadWrap')
+        const $InfoWrap = $(this)
+            .closest('.matchEachDetailBtnWrap')
+            .siblings('.matchEachDetailInfoWrap');
+        const $SquadWrap = $(this)
+            .closest('.matchEachDetailBtnWrap')
+            .siblings('.matchEachDetailSquadWrap');
         // 컨텐츠 영역 숨김과 보임처리
-        $InfoWrap.css('display','flex')
-        $SquadWrap.css('display','none')
+        $InfoWrap.css('display', 'flex');
+        $SquadWrap.css('display', 'none');
     });
 
     // 스쿼드 클릭시
@@ -58,50 +62,57 @@ $(document).ready(function () {
         $(this).siblings().removeClass('action');
         $(this).addClass('action');
 
-        const $InfoWrap = $(this).closest('.matchEachDetailBtnWrap').siblings('.matchEachDetailInfoWrap')
-        const $SquadWrap = $(this).closest('.matchEachDetailBtnWrap').siblings('.matchEachDetailSquadWrap')
+        const $InfoWrap = $(this)
+            .closest('.matchEachDetailBtnWrap')
+            .siblings('.matchEachDetailInfoWrap');
+        const $SquadWrap = $(this)
+            .closest('.matchEachDetailBtnWrap')
+            .siblings('.matchEachDetailSquadWrap');
 
         // 컨텐츠 영역 숨김과 보임처리
-        $InfoWrap.css('display','none')
-        $SquadWrap.css('display','flex')
-
+        $InfoWrap.css('display', 'none');
+        $SquadWrap.css('display', 'flex');
     });
 
     // 스쿼드내 유저 클릭시(나)
     $(document).on('click', '.mySquad', function () {
-        $(this).siblings().removeClass('action');
-        $(this).addClass('action');
+        const $this = $(this)
+        $this.siblings().removeClass('action');
+        $this.addClass('action');
 
         // 컨텐츠 영역 숨김과 보임처리
-        // $('.matchEachDetailInfoWrap').css('display','none')
-        // $('.matchEachDetailSquadWrap').css('display','flex')
-
+        // 스쿼드
+        $this.closest('.squadUserChoice').closest('.squadPlayerWrap').prev('.squadMap').find('.otherSquadPlayerList').addClass('hide')
+        $this.closest('.squadUserChoice').closest('.squadPlayerWrap').prev('.squadMap').find('.ownerSquadPlayerList').removeClass('hide')
+        // 선수단
+        $this.closest('.squadPlayerWrap').find('.squadPlayer').find('.otherPlayerList').addClass('hide')
+        $this.closest('.squadPlayerWrap').find('.squadPlayer').find('.ownerPlayerList').removeClass('hide')
     });
 
-    // 스쿼드내 유저 클릭시(상대대)
+    // 스쿼드내 유저 클릭시(상대)
     $(document).on('click', '.otherSquad', function () {
-        $(this).siblings().removeClass('action');
-        $(this).addClass('action');
+        const $this = $(this)
+        $this.siblings().removeClass('action');
+        $this.addClass('action');
 
         // 컨텐츠 영역 숨김과 보임처리
-        // $('.matchEachDetailInfoWrap').css('display','none')
-        // $('.matchEachDetailSquadWrap').css('display','flex')
-
+        // 스쿼드
+        $this.closest('.squadUserChoice').closest('.squadPlayerWrap').prev('.squadMap').find('.otherSquadPlayerList').removeClass('hide')
+        $this.closest('.squadUserChoice').closest('.squadPlayerWrap').prev('.squadMap').find('.ownerSquadPlayerList').addClass('hide')
+        // 선수단
+        $this.closest('.squadPlayerWrap').find('.squadPlayer').find('.otherPlayerList').removeClass('hide')
+        $this.closest('.squadPlayerWrap').find('.squadPlayer').find('.ownerPlayerList').addClass('hide')
     });
-    
+
     // 선수평가가 클릭시
     $(document).on('click', '.matchPlayerAvg', function () {
         $(this).siblings().removeClass('action');
         $(this).addClass('action');
-
     });
 
     // 간단 정보를 클릭시 액션
     $(document).on('click', '.matchEachSimple', function () {
         const $detail = $(this).next();
-        const $InfoWrap = $(this).closest('.matchEachDetailBtnWrap').siblings('.matchEachDetailInfoWrap')
-        const $SquadWrap = $(this).closest('.matchEachDetailBtnWrap').siblings('.matchEachDetailSquadWrap')
-
         const isOpen = $detail.hasClass('show');
 
         if (isOpen) {
@@ -114,8 +125,7 @@ $(document).ready(function () {
             $detail.find('.matchEachDetailBtnWrap').find('.matchPlayerAvg').removeClass('action');
 
             $detail.removeClass('show').stop().slideUp(100);
-            $detail.find('.matchEachDetailInfoWrap').css('display','flex')
-
+            $detail.find('.matchEachDetailInfoWrap').css('display', 'flex');
         } else {
             $(this).css({ 'margin-bottom': '0px', 'border-radius': '25px 25px 0 0' });
             $detail.css('margin-bottom', '15px');
@@ -123,7 +133,7 @@ $(document).ready(function () {
             // 버튼 색채우기
             $detail.find('.matchEachDetailBtnWrap').find('.matchDetail').addClass('action');
 
-            $detail.find('.matchEachDetailSquadWrap').css('display','none')
+            $detail.find('.matchEachDetailSquadWrap').css('display', 'none');
             $detail.addClass('show').stop().slideDown(100);
         }
     });
@@ -188,7 +198,7 @@ function searchMatch(nickName) {
                     let squadPlayerHTML = '';
                     let squadOtherMapHTML = '';
                     let squadOtherPlayerHTML = '';
-                
+
                     for (let i = 0; i <= 10; i++) {
                         const p = userInfo.player[i];
                         const pOther = otherInfo.player[i];
@@ -196,19 +206,24 @@ function searchMatch(nickName) {
                         const seasonClass = `s${p?.seasonImg.split('season/')[1].split('.')[0]}`;
                         const gradeClass = `en_level${p?.spGrade}`;
                         const imgIdOther = parseInt(pOther?.spId.toString().slice(3));
-                        const seasonClassOther = `s${pOther?.seasonImg.split('season/')[1].split('.')[0]}`;
+                        const seasonClassOther = `s${
+                            pOther?.seasonImg.split('season/')[1].split('.')[0]
+                        }`;
                         const gradeClassOther = `en_level${pOther?.spGrade}`;
-                
+                        
+                        // 사용자
                         squadMapHTML += `
                             <div class="playerSeasonAndGrade fieldPlayer" data-position="${p?.spPosition}">
-                                <img  src="https://fco.dn.nexoncdn.co.kr/live/externalAssets/common/players/p${imgId}.png"/>
+                                <img src="https://fco.dn.nexoncdn.co.kr/live/externalAssets/common/playersAction/p${p?.spId}.png"
+                                onerror="this.onerror=null; this.src='https://fco.dn.nexoncdn.co.kr/live/externalAssets/common/players/p${imgIdOther}.png';" />
                                 <div class="seasonAndGradeWrap">
                                     <div class="eachPlayerName ${seasonClass}"></div>
                                     <div class="eachPlayerGrade ${gradeClass}">${p?.spGrade}</div>
                                 </div>
                             </div>
                         `;
-                
+
+                        // 사용자
                         squadPlayerHTML += `
                             <div class="eachPlayerWrap">
                                 <div class="eachPlayerPosition">${p?.spPosition}</div>
@@ -217,16 +232,19 @@ function searchMatch(nickName) {
                             </div>
                         `;
 
+                        // 상대방
                         squadOtherMapHTML += `
                             <div class="playerSeasonAndGrade fieldPlayer"  data-position="${pOther?.spPosition}">
-                                <img src="https://fco.dn.nexoncdn.co.kr/live/externalAssets/common/players/p${imgIdOther}.png"/>
+                                <img src="https://fco.dn.nexoncdn.co.kr/live/externalAssets/common/playersAction/p${pOther?.spId}.png"
+                                onerror="this.onerror=null; this.src='https://fco.dn.nexoncdn.co.kr/live/externalAssets/common/players/p${imgIdOther}.png';" />
                                 <div class="seasonAndGradeWrap">
                                     <div class="eachPlayerName ${seasonClassOther}"></div>
                                     <div class="eachPlayerGrade ${gradeClassOther}">${pOther?.spGrade}</div>
                                 </div>
                             </div>
                         `;
-                
+
+                        // 상대방
                         squadOtherPlayerHTML += `
                             <div class="eachPlayerWrap">
                                 <div class="eachPlayerPosition">${pOther?.spPosition}</div>
@@ -258,7 +276,11 @@ function searchMatch(nickName) {
                                         <div class="matchEachDetailInfoWrap">
                                             <div class="matchEachDetailOwnerPlace">
                                                 <div>${userInfo.matchDetail.possession}</div>
-                                                <div>${Math.round((userInfo.matchDetail.averageRating) * 100) / 100 }</div>
+                                                <div>${
+                                                    Math.round(
+                                                        userInfo.matchDetail.averageRating * 100,
+                                                    ) / 100
+                                                }</div>
                                                 <div>${userInfo.shoot.goalTotalDisplay}</div>
                                                 <div>${userInfo.shoot.shootTotal}</div>
                                                 <div>${userInfo.shoot.effectiveShootTotal}</div>
@@ -296,7 +318,11 @@ function searchMatch(nickName) {
                                             </div>
                                             <div class="matchEachDetailOtherPlace">
                                                 <div>${otherInfo.matchDetail.possession}</div>
-                                                <div>${Math.round((otherInfo.matchDetail.averageRating) * 100) / 100 }</div>
+                                                <div>${
+                                                    Math.round(
+                                                        otherInfo.matchDetail.averageRating * 100,
+                                                    ) / 100
+                                                }</div>
                                                 <div>${otherInfo.shoot.goalTotalDisplay}</div>
                                                 <div>${otherInfo.shoot.shootTotal}</div>
                                                 <div>${otherInfo.shoot.effectiveShootTotal}</div>
@@ -316,15 +342,29 @@ function searchMatch(nickName) {
                                         </div>
                                         <div class="matchEachDetailSquadWrap">
                                             <div class="squadMap">
-                                            ${squadMapHTML}
+                                                <div class="ownerSquadPlayerList">
+                                                    ${squadMapHTML}
+                                                </div>
+                                                <div class="otherSquadPlayerList hide">
+                                                    ${squadOtherMapHTML}
+                                                </div>
                                             </div>
                                             <div class="squadPlayerWrap">
                                                 <div class="squadUserChoice">
-                                                    <div class="mySquad action">${userInfo.nickname}</div>
-                                                    <div class="otherSquad">${otherInfo.nickname}</div>
+                                                    <div class="mySquad action">${
+                                                        userInfo.nickname
+                                                    }</div>
+                                                    <div class="otherSquad">${
+                                                        otherInfo.nickname
+                                                    }</div>
                                                 </div>
                                                 <div class="squadPlayer">
-                                                ${squadPlayerHTML}
+                                                    <div class="ownerPlayerList">
+                                                        ${squadPlayerHTML}
+                                                    </div>
+                                                    <div class="otherPlayerList hide">
+                                                        ${squadOtherPlayerHTML}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
