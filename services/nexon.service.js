@@ -117,36 +117,8 @@ class nexonService {
                 data[1][0].player.sort((a, b) => a.spPosition - b.spPosition);
                 data[1][1].player.sort((a, b) => a.spPosition - b.spPosition);
             
-                await Promise.all(
-                    data[1][0].player.map(async (player) => {
-                        if (player.spPosition !== 28) {
-                            player.spPosition = POSITION[player.spPosition];
-                            const playerDetailInfo = await this.nexonRepository.getPlayerInfoByspId(
-                                String(player.spId),
-                            );
-                            player.playerName = playerDetailInfo.playerName;
-                            player.playerImg = playerDetailInfo.playerImg;
-                            player.seasonName = playerDetailInfo.seasonName;
-                            player.seasonImg = playerDetailInfo.img;
-                        }
-                    })
-                );
-            
-                await Promise.all(
-                    data[1][1].player.map(async (player) => {
-                        if (player.spPosition !== 28) {
-                            player.spPosition = POSITION[player.spPosition];
-                            const playerDetailInfo = await this.nexonRepository.getPlayerInfoByspId(
-                                String(player.spId),
-                            );
-
-                            player.playerName = playerDetailInfo.playerName;
-                            player.playerImg = playerDetailInfo.playerImg;
-                            player.seasonName = playerDetailInfo.seasonName;
-                            player.seasonImg = playerDetailInfo.img;
-                        }
-                    })
-                );
+                await processPlayerGroup(data[1][0].player, this);
+                await processPlayerGroup(data[1][1].player, this);
             }
             
             return matchDetailResult;
@@ -155,6 +127,39 @@ class nexonService {
             throw error;
         }
     };
+}
+
+const playerInfoCache = new Map();
+
+async function getCachedPlayerInfo(spId) {
+    if (playerInfoCache.has(spId)) return playerInfoCache.get(spId);
+    const info = await this.nexonRepository.getPlayerInfoByspId(String(spId));
+    playerInfoCache.set(spId, info);
+    return info;
+}
+
+function chunkArray(array, size) {
+    const result = [];
+    for (let i = 0; i < array.length; i += size) {
+        result.push(array.slice(i, i + size));
+    }
+    return result;
+}
+
+async function processPlayerGroup(players, ctx) {
+    const chunks = chunkArray(players, 10);
+    for (const group of chunks) {
+        await Promise.all(group.map(async (player) => {
+            if (player.spPosition !== 28) {
+                player.spPosition = POSITION[player.spPosition];
+                const info = await getCachedPlayerInfo.call(ctx, player.spId);
+                player.playerName = info.playerName;
+                player.playerImg = info.playerImg;
+                player.seasonName = info.seasonName;
+                player.seasonImg = info.img;
+            }
+        }));
+    }
 }
 
 module.exports = nexonService;

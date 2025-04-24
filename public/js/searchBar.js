@@ -3,6 +3,25 @@ $(document).ready(async function () {
 
     searchMatch(saveSearchNickName)
 
+    $('#nickname').keydown(function (e) {
+        if (e.keyCode == 13) {
+            e.preventDefault();
+            const nickName = $(this).val().trim();
+
+            if (nickName != '') {
+                window.location.href = `/search/${nickName}`
+            }
+        }
+    });
+
+    $('.searchButton').click(function () {
+        const nickName = $('#nickname').val().trim();
+
+        if (nickName != '') {
+            window.location.href = `/search/${nickName}`
+        }
+    });
+    
     // 공식경기 전적 조회
     $('.officialSearchBtn').click(function () {
         searchMatch(saveSearchNickName)
@@ -81,8 +100,18 @@ $(document).ready(async function () {
 
     // 선수평가가 클릭시
     $(document).on('click', '.matchPlayerAvg', function () {
-        $(this).siblings().removeClass('action');
-        $(this).addClass('action');
+        const $this = $(this)
+        $this.siblings().removeClass('action');
+        $this.addClass('action');
+
+        matchEachPlayerDetailWrap
+        // 컨텐츠 영역 숨김과 보임처리
+        // 스쿼드
+        $this.closest('.squadUserChoice').closest('.squadPlayerWrap').prev('.squadMap').find('.otherSquadPlayerList').removeClass('hide')
+        $this.closest('.squadUserChoice').closest('.squadPlayerWrap').prev('.squadMap').find('.ownerSquadPlayerList').addClass('hide')
+        // 선수단
+        $this.closest('.squadPlayerWrap').find('.squadPlayer').find('.otherPlayerList').removeClass('hide')
+        $this.closest('.squadPlayerWrap').find('.squadPlayer').find('.ownerPlayerList').addClass('hide')
     });
 
     // 간단 정보를 클릭시 액션
