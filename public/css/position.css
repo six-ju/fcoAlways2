@@ -11,20 +11,20 @@
 /* 센터백 라인 */
 .fieldPlayer[data-position="CB"] { top: 380px; left: 230px; }
 .fieldPlayer[data-position="RCB"] { top: 380px; left: 310px; }
-.fieldPlayer[data-position="LCB"] { top: 380px; left: 169px; }
+.fieldPlayer[data-position="LCB"] { top: 380px; left: 140px; }
 
 /* 풀백 */
 .fieldPlayer[data-position="RB"] { top: 360px; left: 410px; }
-.fieldPlayer[data-position="LB"] { top: 360px; left: 70px; }
+.fieldPlayer[data-position="LB"] { top: 360px; left: 50px; }
 
 /* 윙백 */
 .fieldPlayer[data-position="RWB"] { top: 330px; left: 400px; }
 .fieldPlayer[data-position="LWB"] { top: 330px; left: 104px; }
 
 /* 수미 */
-.fieldPlayer[data-position="CDM"] { top: 300px; left: 230px; }
-.fieldPlayer[data-position="RDM"] { top: 300px; left: 297px; }
-.fieldPlayer[data-position="LDM"] { top: 300px; left: 182px; }
+.fieldPlayer[data-position="CDM"] { top: 275px; left: 230px; }
+.fieldPlayer[data-position="RDM"] { top: 275px; left: 326px; }
+.fieldPlayer[data-position="LDM"] { top: 275px; left: 130px; }
 
 /* 중미 */
 .fieldPlayer[data-position="CM"] { top: 260px; left: 230px; }
@@ -32,23 +32,23 @@
 .fieldPlayer[data-position="LCM"] { top: 260px; left: 155px; }
 
 /* 윙미 */
-.fieldPlayer[data-position="RM"] { top: 260px; left: 370px; }
-.fieldPlayer[data-position="LM"] { top: 260px; left: 134px; }
+.fieldPlayer[data-position="RM"] { top: 195px; left: 370px; }
+.fieldPlayer[data-position="LM"] { top: 195px; left: 88px; }
 
 /* 공미 */
 .fieldPlayer[data-position="CAM"] { top: 140px; left: 230px; }
-.fieldPlayer[data-position="RAM"] { top: 140px; left: 297px; }
-.fieldPlayer[data-position="LAM"] { top: 140px; left: 182px; }
+.fieldPlayer[data-position="RAM"] { top: 140px; left: 326px; }
+.fieldPlayer[data-position="LAM"] { top: 140px; left: 130px; }
 
 /* 세컨 */
 .fieldPlayer[data-position="CF"] { top: 100px; left: 230px; }
-.fieldPlayer[data-position="RF"] { top: 100px; left: 297px; }
-.fieldPlayer[data-position="LF"] { top: 100px; left: 182px; }
+.fieldPlayer[data-position="RF"] { top: 100px; left: 326px; }
+.fieldPlayer[data-position="LF"] { top: 100px; left: 130px; }
 
 /* 최전방 */
 .fieldPlayer[data-position="ST"] { top: 20px; left: 230px; }
-.fieldPlayer[data-position="RS"] { top: 20px; left: 297px; }
-.fieldPlayer[data-position="LS"] { top: 20px; left: 182px; }
+.fieldPlayer[data-position="RS"] { top: 20px; left: 326px; }
+.fieldPlayer[data-position="LS"] { top: 20px; left: 130px; }
 
 /* 윙어 */
 .fieldPlayer[data-position="RW"] { top: 60px; left: 410px; }
