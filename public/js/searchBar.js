@@ -1,36 +1,11 @@
-$(document).ready(function () {
-    let saveSearchNickName = '';
+$(document).ready(async function () {
+    let saveSearchNickName = decodeURIComponent(window.location.pathname.split('/')[2] || '');
 
-    $('#nickname').keydown(function (e) {
-        if (e.keyCode == 13) {
-            e.preventDefault();
-            const nickName = $(this).val().trim();
-
-            if (nickName != '') {
-                searchNickName(nickName);
-                saveSearchNickName = nickName;
-            }
-        }
-    });
-
-    $('.searchButton').click(function () {
-        const nickName = $('#nickname').val().trim();
-
-        if (nickName != '') {
-            searchNickName(nickName);
-            saveSearchNickName = nickName;
-        }
-    });
+    searchMatch(saveSearchNickName)
 
     // 공식경기 전적 조회
     $('.officialSearchBtn').click(function () {
-        // showModal('아직 준비중임.');
-        // return;
-        if (saveSearchNickName == '') {
-            alert('닉네임 검색후 이용 가능합니다.');
-            return;
-        }
-        searchMatch(saveSearchNickName);
+        searchMatch(saveSearchNickName)
     });
 
     // 감독경기 전적 조회
@@ -137,10 +112,9 @@ $(document).ready(function () {
             $detail.addClass('show').stop().slideDown(100);
         }
     });
-    // $('.matchEachInfo').click(function () {});
 });
 
-function searchNickName(nickName) {
+async function searchNickName(nickName) {
     $.ajax({
         url: `/api/nexon/search/${nickName}`,
         type: 'GET',
@@ -169,7 +143,7 @@ function searchNickName(nickName) {
     });
 }
 
-function searchMatch(nickName) {
+async function searchMatch(nickName) {
     $.ajax({
         url: `/api/nexon/match/${nickName}`,
         type: 'GET',
@@ -181,9 +155,10 @@ function searchMatch(nickName) {
         complete: function () {
             hideLoading();
         },
-        success: function (data) {
+        success: async function (data) {
             console.log(data);
             if (data) {
+                await searchNickName(nickName)
                 const list = matchListComponent(data, nickName)
 
                 $('.matchList').html(list);

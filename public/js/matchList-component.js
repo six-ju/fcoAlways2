@@ -31,7 +31,13 @@ function matchListComponent(data, nickName){
                 <div class="playerSeasonAndGrade fieldPlayer" data-position="${p?.spPosition}">
                     <img src="https://fco.dn.nexoncdn.co.kr/live/externalAssets/common/playersAction/p${p?.spId}.png"
                     loading="lazy" 
-                    onerror="this.onerror=null; this.src='https://fco.dn.nexoncdn.co.kr/live/externalAssets/common/players/p${imgId}.png';" />
+                    onerror="this.onerror=null; this.src='https://fco.dn.nexoncdn.co.kr/live/externalAssets/common/players/p${imgId}.png';" 
+                    style="
+                            width: 72px;
+                            aspect-ratio: 1/1;
+                            object-fit: cover;
+                            display: block;
+                        " />
                     <div class="seasonAndGradeWrap">
                         <div class="eachPlayerName ${seasonClass}"></div>
                         <div class="eachPlayerGrade ${gradeClass}">${p?.spGrade}</div>
@@ -53,7 +59,13 @@ function matchListComponent(data, nickName){
                 <div class="playerSeasonAndGrade fieldPlayer"  data-position="${pOther?.spPosition}">
                     <img src="https://fco.dn.nexoncdn.co.kr/live/externalAssets/common/playersAction/p${pOther?.spId}.png"
                     loading="lazy" 
-                    onerror="this.onerror=null; this.src='https://fco.dn.nexoncdn.co.kr/live/externalAssets/common/players/p${imgIdOther}.png';" />
+                    onerror="this.onerror=null; this.src='https://fco.dn.nexoncdn.co.kr/live/externalAssets/common/players/p${imgIdOther}.png';" 
+                    style="
+                            width: 72px;
+                            aspect-ratio: 1/1;
+                            object-fit: cover;
+                            display: block;
+                        "/>
                     <div class="seasonAndGradeWrap">
                         <div class="eachPlayerName ${seasonClassOther}"></div>
                         <div class="eachPlayerGrade ${gradeClassOther}">${pOther?.spGrade}</div>
