@@ -3,9 +3,22 @@
 <html lang="ko">
     <head>
         <meta charset="UTF-8" />
+        <meta name="naver-site-verification" content="1f7263d85e618ce68cb85f2ca0885746623ade60" />
         <title>FCOAlways</title>
         <link rel="stylesheet" href="/css/common.css" />
+        <link rel="icon" type="image/png" href="/favicon.png" />
 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="FCOAlways - 피파온라인 공식경기 검색 및 분석 서비스" />
+        <meta name="keywords" content="피파온라인, FCOAlways, 공식경기, 선수분석, 전적검색" />
+        <meta name="author" content="FCOAlways" />
+
+        <!-- Open Graph (페북, 카카오톡 공유용) -->
+        <meta property="og:title" content="FCOAlways - 피파온라인 공식경기 검색 사이트" />
+        <meta property="og:description" content="공식경기 전적, 선수평가, 스쿼드까지 한번에!" />
+        <meta property="og:image" content="https://fcoalways.online/assets/fco-og-thumbnail.png" />
+        <meta property="og:url" content="https://fcoalways.online" />
+        <meta property="og:type" content="website" />
         <!-- 무료아이콘 -->
         <link
             rel="stylesheet"
@@ -18,19 +31,18 @@
     <body>
         <div class="forKaKaoAd">
             <ins
-                    class="kakao_ad_area pc"
-                    style="display: none"
-                    data-ad-unit="DAN-oQJN02iYektg09FM"
-                    data-ad-width="160"
-                    data-ad-height="600"
-                ></ins>
-                <script
-                    type="text/javascript"
-                    src="//t1.daumcdn.net/kas/static/ba.min.js"
-                    async
-                ></script>
+                class="kakao_ad_area pc"
+                style="display: none"
+                data-ad-unit="DAN-oQJN02iYektg09FM"
+                data-ad-width="160"
+                data-ad-height="600"
+            ></ins>
+            <script
+                type="text/javascript"
+                src="//t1.daumcdn.net/kas/static/ba.min.js"
+                async
+            ></script>
             <div class="container">
-                
                 <!-- 공통 헤더 -->
                 <%- include('share/header.ejs') %>
 
@@ -48,19 +60,26 @@
                 <!-- 공통 로딩 화면 -->
                 <%- include('share/loading.ejs') %>
             </div>
-            <ins class="kakao_ad_area pc" style="display:none;"
-            data-ad-unit = "DAN-2KCdFesbBp9zMxNF"
-            data-ad-width = "160"
-            data-ad-height = "600"></ins>
-            <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+            <ins
+                class="kakao_ad_area pc"
+                style="display: none"
+                data-ad-unit="DAN-2KCdFesbBp9zMxNF"
+                data-ad-width="160"
+                data-ad-height="600"
+            ></ins>
+            <script
+                type="text/javascript"
+                src="//t1.daumcdn.net/kas/static/ba.min.js"
+                async
+            ></script>
         </div>
         <script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
         <!-- 방문자수 조회 -->
         <script type="text/javascript">
-            if(!wcs_add) var wcs_add = {};
-            wcs_add["wa"] = "12923bc8e933b30";
-            if(window.wcs) {
-            wcs_do();
+            if (!wcs_add) var wcs_add = {};
+            wcs_add['wa'] = '12923bc8e933b30';
+            if (window.wcs) {
+                wcs_do();
             }
         </script>
     </body>
