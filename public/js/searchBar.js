@@ -3,50 +3,22 @@ $(document).ready(async function () {
 
     searchMatch(saveSearchNickName)
 
-    const playerStatus = {
-        shoot: 72,
-        pass: 85,
-        defending: 60,
-        dribble: 80,
-        speed: 90,
-        stamina: 75
-    };
+    $('#nickname').keydown(function (e) {
+        if (e.keyCode == 13) {
+            e.preventDefault();
+            const nickName = $(this).val().trim();
 
-    const labels = ['슛', '패스', '수비', '드리블', '스피드', '체력'];
-    const data = [
-        playerStatus.shoot,
-        playerStatus.pass,
-        playerStatus.defending,
-        playerStatus.dribble,
-        playerStatus.speed,
-        playerStatus.stamina
-    ];
-
-    const ctx = $('#playerRadarChart');
-    new Chart(ctx, {
-        type: 'radar',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: '선수 능력치',
-                data: data,
-                fill: true,
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                pointBackgroundColor: 'rgba(75, 192, 192, 1)'
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: { display: false }
-            },
-            scales: {
-                r: {
-                    min: 0,
-                    max: 100
-                }
+            if (nickName != '') {
+                window.location.href = `/search/${nickName}`
             }
+        }
+    });
+
+    $('.searchButton').click(function () {
+        const nickName = $('#nickname').val().trim();
+
+        if (nickName != '') {
+            window.location.href = `/search/${nickName}`
         }
     });
     

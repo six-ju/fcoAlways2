@@ -168,7 +168,7 @@
 
 .matchEachDetailBtnWrap div {
     border-bottom: 1px solid #4e996c;
-    width: 253px;
+    width: 360px;
     padding: 17px;
     font-size: 17px;
     font-weight: bold;
@@ -181,7 +181,7 @@
 
 .matchEachSimple.lose + .matchEachDetail .matchEachDetailBtnWrap div {
     border-bottom: 1px solid #b53737 !important;
-    width: 253px;
+    width: 360px;
     padding: 17px;
     font-size: 17px;
     font-weight: bold;
@@ -199,7 +199,7 @@
 .matchEachDetailOwnerPlace,
 .matchEachDetailMiddlePlace,
 .matchEachDetailOtherPlace {
-    width: 253px;
+    width: 360px;
     font-size: 15px;
     font-weight: bold;
     line-height: 2;

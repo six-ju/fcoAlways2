@@ -108,7 +108,6 @@ function matchListComponent(data, nickName){
                             <div class="matchEachDetailBtnWrap">
                                 <div class="matchDetail">상세정보</div>
                                 <div class="matchSquad">스쿼드</div>
-                                <div class="matchPlayerAvg">선수평가</div>
                             </div>
                             <div class="matchEachDetailInfoWrap">
                                 <div class="matchEachDetailOwnerPlace">
