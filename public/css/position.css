@@ -19,7 +19,7 @@
 
 /* 윙백 */
 .fieldPlayer[data-position="RWB"] { top: 330px; left: 400px; }
-.fieldPlayer[data-position="LWB"] { top: 330px; left: 104px; }
+.fieldPlayer[data-position="LWB"] { top: 330px; left: 70px; }
 
 /* 수미 */
 .fieldPlayer[data-position="CDM"] { top: 275px; left: 230px; }
