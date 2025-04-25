@@ -20,6 +20,7 @@ class playerService {
                     player_id,
                     season_id:seasonid,
                     playerName: data.name,
+                    playerImg: `https://fco.dn.nexoncdn.co.kr/live/externalAssets/common/playersAction/p${data.id}.png`
                 });
             });
 

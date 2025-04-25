@@ -59,10 +59,17 @@ class nexonRepository {
     insertPlayer = async (playerList) => {
         try {
             const chunkSize = 500;
+            
+            await Player.destroy({
+                where: {}, // 모든 데이터 삭제
+                truncate: true, // 옵션: auto increment 초기화까지 할지 여부
+            });
+
             for (let i = 0; i < playerList.length; i += chunkSize) {
                 const chunk = playerList.slice(i, i + chunkSize);
 
                 await Player.bulkCreate(chunk, {
+                    ignoreDuplicates: true,
                     raw: true,
                 });
             }
