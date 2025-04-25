@@ -21,18 +21,19 @@ $(document).ready(async function () {
             window.location.href = `/search/${nickName}`
         }
     });
-    
+
     // 공식경기 전적 조회
     $('.officialSearchBtn').click(function () {
         searchMatch(saveSearchNickName)
+        $(this).addClass('action')
+        $('.managerSearchBtn').removeClass('action')
     });
 
     // 감독경기 전적 조회
     $('.managerSearchBtn').click(function () {
-        showModal('아직 준비중임.');
-        return;
-
-        // searchMatch(saveSearchNickName);
+        searchMatch(saveSearchNickName, 'manager');
+        $(this).addClass('action')
+        $('.officialSearchBtn').removeClass('action')
     });
 
     // 상세정보보 클릭시
@@ -172,10 +173,11 @@ async function searchNickName(nickName) {
     });
 }
 
-async function searchMatch(nickName) {
+async function searchMatch(nickName, type = '') {
     $.ajax({
         url: `/api/nexon/match/${nickName}`,
         type: 'GET',
+        data: {type},
         beforeSend: function () {
             $('.matchList').empty();
             $('.officialSearchBtn').addClass('action');
