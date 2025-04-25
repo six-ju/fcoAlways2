@@ -1,7 +1,7 @@
 $(document).ready(async function () {
     let saveSearchNickName = decodeURIComponent(window.location.pathname.split('/')[2] || '');
-
-    searchMatch(saveSearchNickName)
+    
+    await searchNickName(saveSearchNickName)
 
     $('#nickname').keydown(function (e) {
         if (e.keyCode == 13) {
@@ -189,7 +189,6 @@ async function searchMatch(nickName, type = '') {
         success: async function (data) {
             console.log(data);
             if (data) {
-                await searchNickName(nickName)
                 const list = matchListComponent(data, nickName)
 
                 $('.matchList').html(list);

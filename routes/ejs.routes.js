@@ -17,4 +17,12 @@ router.get('/search/:nickname', (req, res, next) => {
     }
 });
 
+router.get('/simulation/upgrade', (req, res, next) => {
+    try {
+        res.render('index.ejs', { components: 'upgrade' });
+    } catch (error) {
+        next(error);
+    }
+});
+
 module.exports = router;
