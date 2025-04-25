@@ -54,6 +54,10 @@
                     <!-- 메인 검색 바 -->
                     <% if (components === 'searchNickname') { %> <%- include('search/index.ejs') %>
                     <% } %>
+
+                    <!-- 강화 시뮬레이션 -->
+                    <% if (components === 'upgrade') { %> <%- include('simulation/playerUpgrade.ejs') %>
+                    <% } %>
                 </main>
 
                 <!-- 공통 푸터 -->
