@@ -6,15 +6,23 @@ const PlayerImgService = new playerImgService();
 const PlayerService = new playerSevice();
 const SeasonService = new seasonService();
 
-cron.schedule('10 44 13 * * *', async () => {
+cron.schedule('10 24 11 * * *', async () => {
     console.log('시즌을 위한 스케줄러 시작');
 
     // 선수 이미지 저장
+    // console.log('선수 이미지 저장 시작');
     // await PlayerImgService.getPlayerImgAPI();
+    // console.log('선수 이미지 저장 끝');
+
     // 선수저장
-    // await PlayerService.getPlayerAPI();
-    // 시즌저장
+    console.log('선수 저장 시작')
+    await PlayerService.getPlayerAPI();
+    console.log('선수 저장 끝')
+
+    // console.log('시즌 저장 시작')
+    // // 시즌저장
     // await SeasonService.getSeasonAPI();
+    // console.log('시즌 저장 끝')
 });
 
 console.log('스케줄러가 시작되었습니다.');

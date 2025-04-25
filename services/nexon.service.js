@@ -82,16 +82,17 @@ class nexonService {
         }
     };
 
-    searchMatch = async (nickname) => {
+    searchMatch = async (nickname, type) => {
         try {
             const matchDetailResult = [];
+            const gameType = type == 'manager' ? '52' : '50'
 
             // 유저 ouid 조회
             const ouid = await this.nexonRepository.getOuid(nickname);
 
             // 유저 매치 기록 조회 (일단 공식 경기만)
             const matchIdResult = await axios.get(
-                `${startUrl}/fconline/v1/user/match?ouid=${ouid.ouid}&matchtype=50&offset=0&limit=20`,
+                `${startUrl}/fconline/v1/user/match?ouid=${ouid.ouid}&matchtype=${gameType}&offset=0&limit=20`,
                 {
                     headers: {
                         'x-nxopen-api-key': process.env.NEXON_API_KEY,

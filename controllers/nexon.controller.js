@@ -20,12 +20,14 @@ class nexonController {
     searchMatch = async (req, res) => {
         try {
             const { nickName } = req.params;
-
-            const result = await this.nexonService.searchMatch(nickName);
+            const { type } = req.query ?? '';
+            const result = await this.nexonService.searchMatch(nickName, type);
 
             return res.status(200).json(result);
         } catch (error) {
-            return res.status(error.status || 400).json({ message: '전적 검색 도중 오류가 발생했습니다.'});
+            return res
+                .status(error.status || 400)
+                .json({ message: '전적 검색 도중 오류가 발생했습니다.' });
         }
     };
 }

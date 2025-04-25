@@ -51,8 +51,8 @@
     padding: 6px 64px;
     border-radius: 0 0 25px 0px;
     cursor: pointer;
-    border-bottom: 2px solid;
-    border-right: 2px solid;
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
 }
 
 .managerSearchBtn:hover {
