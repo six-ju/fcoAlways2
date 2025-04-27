@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="/css/notice.css" />
+
+<div class="noticeWrap">
+  <table class="noticetable">
+    <thead>
+      <tr>
+        <th>NO</th>
+        <th>제목</th>
+        <th>날짜</th>
+        <th>작성자</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr data-id="1">
+        <td>공지</td>
+        <td>안녕하세요. 개발자 입니다!!</td>
+        <td>2025-04-27</td>
+        <td>관리자</td>
+      </tr>
+      <!-- 이런식으로 계속 추가 -->
+    </tbody>
+  </table>
+</div>
+
+<script>
+  $(document).ready(function () {
+    $("tbody>tr").click(function () {
+      const id = $(this).attr("data-id");
+      window.location.href = `/notice/detail/${id}`;
+    });
+  });
+</script>

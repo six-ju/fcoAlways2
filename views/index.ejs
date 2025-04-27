@@ -58,6 +58,14 @@
                     <!-- 강화 시뮬레이션 -->
                     <% if (components === 'upgrade') { %> <%- include('simulation/playerUpgrade.ejs') %>
                     <% } %>
+
+                    <!-- 공지사항 -->
+                    <% if (components === 'notice') { %> <%- include('notice/notice.ejs') %>
+                    <% } %>
+
+                    <!-- 공지사항 디테일 -->
+                    <% if (components === 'noticeDetail') { %> <%- include('notice/detail.ejs') %>
+                    <% } %>
                 </main>
 
                 <!-- 공통 푸터 -->
