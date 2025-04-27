@@ -4,7 +4,15 @@ function matchListComponent(data, nickName){
     data.map((info) => {
         const userInfo = info[1][0].nickname == nickName ? info[1][0] : info[1][1];
         const otherInfo = info[1][1].nickname == nickName ? info[1][0] : info[1][1];
-        const userMatchResult = userInfo.matchDetail.matchResult;
+
+        const userMatchResult = userInfo.matchDetail.matchResult
+        let userMatchResultColor = ''
+        if(userMatchResult == '패'){
+            userMatchResultColor = 'lose'
+        }else if(userMatchResult == '무'){
+            userMatchResultColor = 'draw'
+        }
+
         const otherMatchResult = otherInfo.matchDetail.matchResult;
         const userMatchScore = userInfo.shoot.goalTotal;
         const otherMatchScore = otherInfo.shoot.goalTotal;
@@ -93,7 +101,7 @@ function matchListComponent(data, nickName){
 
         list += `
             <div class="matchEachInfo ">
-                <div class="matchEachSimple ${userMatchResult == '승' ? '' : 'lose'}">
+                <div class="matchEachSimple ${userMatchResultColor}">
                     <div class="nickNameDiv">${userInfo.nickname}</div>
                     <div class="resultDiv">${userMatchResult}</div>
                     <div class="scoreDiv">${userMatchScore}</div>

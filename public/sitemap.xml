@@ -3,14 +3,14 @@
         
         <url>
             <loc>https://fcoalways.online/</loc>
-            <lastmod>2025-04-25</lastmod>
+            <lastmod>2025-04-27</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.8</priority>
         </url>
 
         <url>
             <loc>https://fcoalways.online/search/:nickname</loc>
-            <lastmod>2025-04-25</lastmod>
+            <lastmod>2025-04-27</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.8</priority>
         </url>
