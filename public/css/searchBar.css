@@ -136,6 +136,18 @@
     cursor: pointer;
 }
 
+.matchEachSimple.draw {
+    background-color: #87879f;
+    /* 기본 붉은색 */
+}
+
+.matchEachSimple.draw:hover {
+    background-color: #7c7c90;
+    /* 더 진한 붉은색 */
+    color: white;
+    cursor: pointer;
+}
+
 .nickNameDiv {
     width: 185px;
 }
@@ -179,6 +191,7 @@
     color: white;
 }
 
+/* 패배배 */
 .matchEachSimple.lose + .matchEachDetail .matchEachDetailBtnWrap div {
     border-bottom: 1px solid #b53737 !important;
     width: 360px;
@@ -193,6 +206,24 @@
 
 .matchEachSimple.lose + .matchEachDetail .matchEachDetailBtnWrap div:hover {
     background-color: #b53737 !important;
+    color: white;
+}
+
+/* 무승부 */
+.matchEachSimple.draw + .matchEachDetail .matchEachDetailBtnWrap div {
+    border-bottom: 1px solid #87879f !important;
+    width: 360px;
+    padding: 17px;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.matchEachSimple.draw + .matchEachDetail .matchEachDetailBtnWrap div.action {
+    background-color: #87879f !important;
+}
+
+.matchEachSimple.draw + .matchEachDetail .matchEachDetailBtnWrap div:hover {
+    background-color: #7c7c90 !important;
     color: white;
 }
 
@@ -255,6 +286,16 @@
     div.action {
     background-color: #b53737 !important;
     border-bottom: 1px solid #b53737;
+}
+
+.matchEachSimple.draw
+    + .matchEachDetail
+    .matchEachDetailSquadWrap
+    .squadPlayerWrap
+    .squadUserChoice
+    div.action {
+    background-color: #87879f !important;
+    border-bottom: 1px solid #87879f;
 }
 
 .squadPlayerWrap .otherSquad {

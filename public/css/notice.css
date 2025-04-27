@@ -1,0 +1,36 @@
+.noticeWrap {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 760px;
+    max-height: 483px;
+    padding: 70px 0px;
+}
+
+.noticetable {
+    height: 100%;
+    width: 100%;
+    border: 0;
+    border-radius: 11px;
+    background-color: #00000052;
+    color: white;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.noticetable thead tr th {
+    padding: 20px 0px;
+    border-bottom: 1px solid white;
+}
+
+.noticetable tbody {
+    overflow-y: scroll;
+}
+
+.noticetable tbody tr:hover {
+    background-color: #00000066;
+    color: white;
+}
+
+.noticetable tbody tr td {
+    height: 50px;
+}
