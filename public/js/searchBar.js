@@ -140,6 +140,49 @@ $(document).ready(async function () {
 
             $detail.find('.matchEachDetailSquadWrap').css('display', 'none');
             $detail.addClass('show').stop().slideDown(100);
+
+            // 경기별 베스트 및 워스트 표시
+            const $ownerAvg = $detail.find('.ownerPlayerList .eachPlayerWrap .eachPlayerAvg')
+            const $otherAvg = $detail.find('.otherPlayerList .eachPlayerWrap .eachPlayerAvg')
+            let ownerMin = ''
+            let ownerMinIndex = ''
+            let ownerMax = ''
+            let ownerMaxIndex = ''
+            let otherMin = ''
+            let otherMinIndex = ''
+            let otherMax = ''
+            let otherMaxIndex = ''
+
+            $ownerAvg.each(function(index, avg){
+                if($(avg).text() > ownerMax || ownerMax == ''){
+                    ownerMax = $(avg).text()
+                    ownerMaxIndex = index
+                }
+
+                if($(avg).text() < ownerMin || ownerMin == ''){
+                    ownerMin = $(avg).text()
+                    ownerMinIndex = index
+                }
+            });
+
+            $otherAvg.each(function(index, avg){
+                if($(avg).text() > otherMax || otherMax == ''){
+                    otherMax = $(avg).text()
+                    otherMaxIndex = index
+                }
+
+                if($(avg).text() < otherMin || otherMin == ''){
+                    otherMin = $(avg).text()
+                    otherMinIndex = index
+                }
+            });
+
+            $detail.find('.ownerPlayerList .eachPlayerWrap').eq(ownerMinIndex).addClass('en_level2')
+            $detail.find('.ownerPlayerList .eachPlayerWrap').eq(ownerMaxIndex).addClass('en_level13')
+            $detail.find('.otherPlayerList .eachPlayerWrap').eq(otherMinIndex).addClass('en_level2')
+            $detail.find('.otherPlayerList .eachPlayerWrap').eq(otherMaxIndex).addClass('en_level13')
+            // 경기별 베스트 및 워스트 표시
+
         }
     });
 });
