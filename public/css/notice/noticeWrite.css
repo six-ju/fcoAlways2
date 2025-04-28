@@ -1,0 +1,71 @@
+.noticeDetailWrap {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 760px;
+    max-height: 483px;
+    padding: 70px 0px;
+}
+
+.detailWrap {
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 25px;
+    background-color: #00000091;
+    max-height: 484px;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+
+.noticeDetailTitleInput{
+    border: 0;
+    border-radius: 5px;
+    padding: 7px 11px;
+    margin-right: 25px;
+    width: 100%;
+}
+
+.noticeDetailTextarea{
+    resize: none;
+    width: 651px;
+    height: 310px;
+    border: 0;
+    border-radius: 5px;
+    padding: 16px;
+}
+
+.noticeDetailContent {
+    font-size: 15px;
+    color: white;
+    padding: 5px 0;
+    white-space: pre-line;
+}
+
+.noticeDetailInfo {
+    display: flex;
+    justify-content: flex-start;
+    font-size: 20px;
+    border-bottom: 1px solid black;
+    color: white;
+    padding: 0px 0 18px 0;
+}
+
+.noticeDetailInfo select{
+    border: 0;
+    border-radius: 5px;
+    padding: 7px 11px;
+    margin-right: 25px;
+}
+
+.noticeDetailBtns {
+    text-align: right;
+    padding: 30px 0;
+}
+
+.noticeListBtn {
+    border-radius: 5px;
+    padding: 6px 12px;
+    background-color: #4e996c;
+    font-size: 14px;
+    color: white;
+    font-weight: bold;
+}

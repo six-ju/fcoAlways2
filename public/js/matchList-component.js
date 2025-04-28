@@ -2,8 +2,8 @@ function matchListComponent(data, nickName){
     let list = '';
 
     data.map((info) => {
-        const userInfo = info[1][0].nickname == nickName ? info[1][0] : info[1][1];
-        const otherInfo = info[1][1].nickname == nickName ? info[1][0] : info[1][1];
+        const userInfo = (info[1][0].nickname).toLowerCase() == (nickName).toLowerCase() ? info[1][0] : info[1][1];
+        const otherInfo = (info[1][1].nickname).toLowerCase() == (nickName).toLowerCase() ? info[1][0] : info[1][1];
 
         const userMatchResult = userInfo.matchDetail.matchResult
         let userMatchResultColor = ''
@@ -14,8 +14,8 @@ function matchListComponent(data, nickName){
         }
 
         const otherMatchResult = otherInfo.matchDetail.matchResult;
-        const userMatchScore = userInfo.shoot.goalTotal;
-        const otherMatchScore = otherInfo.shoot.goalTotal;
+        const userMatchScore = userInfo.shoot.goalTotal ?? 0;
+        const otherMatchScore = otherInfo.shoot.goalTotal ?? 0;
 
         let squadMapHTML = '';
         let squadPlayerHTML = '';
@@ -35,61 +35,64 @@ function matchListComponent(data, nickName){
             }`;
             const gradeClassOther = `en_level${pOther?.spGrade}`;
             
-            // 사용자
-            squadMapHTML += `
-                <div class="playerSeasonAndGrade fieldPlayer" data-position="${p?.spPosition}">
-                    <img src="https://fco.dn.nexoncdn.co.kr/live/externalAssets/common/playersAction/p${p?.spId}.png"
-                    loading="lazy" 
-                    onerror="this.onerror=null; this.src='https://fco.dn.nexoncdn.co.kr/live/externalAssets/common/players/p${imgId}.png';" 
-                    style="
-                            width: 72px;
-                            aspect-ratio: 1/1;
-                            object-fit: cover;
-                            display: block;
-                        " />
-                    <div class="seasonAndGradeWrap">
-                        <div class="eachPlayerName ${seasonClass}"></div>
-                        <div class="eachPlayerGrade ${gradeClass}">${p?.spGrade}</div>
+            if(userInfo.player.length > 0){
+                // 사용자
+                squadMapHTML += `
+                    <div class="playerSeasonAndGrade fieldPlayer" data-position="${p?.spPosition}">
+                        <img src="https://fco.dn.nexoncdn.co.kr/live/externalAssets/common/playersAction/p${p?.spId}.png"
+                        loading="lazy" 
+                        onerror="this.onerror=null; this.src='https://fco.dn.nexoncdn.co.kr/live/externalAssets/common/players/p${imgId}.png';" 
+                        style="
+                                width: 72px;
+                                aspect-ratio: 1/1;
+                                object-fit: cover;
+                                display: block;
+                            " />
+                        <div class="seasonAndGradeWrap">
+                            <div class="eachPlayerName ${seasonClass}"></div>
+                            <div class="eachPlayerGrade ${gradeClass}">${p?.spGrade}</div>
+                        </div>
                     </div>
-                </div>
-            `;
+                `;
 
-            // 사용자
-            squadPlayerHTML += `
-                <div class="eachPlayerWrap">
-                    <div class="eachPlayerPosition">${p?.spPosition}</div>
-                    <div class="eachPlayerSeason">${p?.playerName}</div>
-                    <div class="eachPlayerAvg">${p?.status.spRating}</div>
-                </div>
-            `;
-
-            // 상대방
-            squadOtherMapHTML += `
-                <div class="playerSeasonAndGrade fieldPlayer"  data-position="${pOther?.spPosition}">
-                    <img src="https://fco.dn.nexoncdn.co.kr/live/externalAssets/common/playersAction/p${pOther?.spId}.png"
-                    loading="lazy" 
-                    onerror="this.onerror=null; this.src='https://fco.dn.nexoncdn.co.kr/live/externalAssets/common/players/p${imgIdOther}.png';" 
-                    style="
-                            width: 72px;
-                            aspect-ratio: 1/1;
-                            object-fit: cover;
-                            display: block;
-                        "/>
-                    <div class="seasonAndGradeWrap">
-                        <div class="eachPlayerName ${seasonClassOther}"></div>
-                        <div class="eachPlayerGrade ${gradeClassOther}">${pOther?.spGrade}</div>
+                // 사용자
+                squadPlayerHTML += `
+                    <div class="eachPlayerWrap">
+                        <div class="eachPlayerPosition">${p?.spPosition}</div>
+                        <div class="eachPlayerSeason">${p?.playerName}</div>
+                        <div class="eachPlayerAvg">${p?.status.spRating}</div>
                     </div>
-                </div>
-            `;
+                `;
+            }
+            if(otherInfo.player.length > 0){
+                // 상대방
+                squadOtherMapHTML += `
+                    <div class="playerSeasonAndGrade fieldPlayer"  data-position="${pOther?.spPosition}">
+                        <img src="https://fco.dn.nexoncdn.co.kr/live/externalAssets/common/playersAction/p${pOther?.spId}.png"
+                        loading="lazy" 
+                        onerror="this.onerror=null; this.src='https://fco.dn.nexoncdn.co.kr/live/externalAssets/common/players/p${imgIdOther}.png';" 
+                        style="
+                                width: 72px;
+                                aspect-ratio: 1/1;
+                                object-fit: cover;
+                                display: block;
+                            "/>
+                        <div class="seasonAndGradeWrap">
+                            <div class="eachPlayerName ${seasonClassOther}"></div>
+                            <div class="eachPlayerGrade ${gradeClassOther}">${pOther?.spGrade}</div>
+                        </div>
+                    </div>
+                `;
 
-            // 상대방
-            squadOtherPlayerHTML += `
-                <div class="eachPlayerWrap">
-                    <div class="eachPlayerPosition">${pOther?.spPosition}</div>
-                    <div class="eachPlayerSeason">${pOther?.playerName}</div>
-                    <div class="eachPlayerAvg">${pOther?.status.spRating}</div>
-                </div>
-            `;
+                // 상대방
+                squadOtherPlayerHTML += `
+                    <div class="eachPlayerWrap">
+                        <div class="eachPlayerPosition">${pOther?.spPosition}</div>
+                        <div class="eachPlayerSeason">${pOther?.playerName}</div>
+                        <div class="eachPlayerAvg">${pOther?.status.spRating}</div>
+                    </div>
+                `;
+            }
 
             playerDetailAvg += `
                 <div class="circleChart" data-percent="75">
@@ -98,6 +101,7 @@ function matchListComponent(data, nickName){
             `
 
         }
+    
 
         list += `
             <div class="matchEachInfo ">
@@ -125,21 +129,21 @@ function matchListComponent(data, nickName){
                                             userInfo.matchDetail.averageRating * 100,
                                         ) / 100
                                     }</div>
-                                    <div>${userInfo.shoot.goalTotalDisplay}</div>
-                                    <div>${userInfo.shoot.shootTotal}</div>
-                                    <div>${userInfo.shoot.effectiveShootTotal}</div>
-                                    <div>${userInfo.shoot.ownGoal}</div>
-                                    <div>${userInfo.shoot.shootFreekick}</div>
-                                    <div>${userInfo.shoot.shootPenaltyKick}</div>
-                                    <div>${userInfo.pass.passTry}</div>
-                                    <div>${userInfo.pass.longPassTry}</div>
-                                    <div>${userInfo.pass.throughPassTry}</div>
-                                    <div>${userInfo.matchDetail.cornerKick}</div>
-                                    <div>${userInfo.matchDetail.offsideCount}</div>
-                                    <div>${userInfo.matchDetail.foul}</div>
-                                    <div>${userInfo.matchDetail.injury}</div>
-                                    <div>${userInfo.matchDetail.yellowCards}</div>
-                                    <div>${userInfo.matchDetail.redCards}</div>
+                                    <div>${userInfo.shoot.goalTotalDisplay ?? 0}</div>
+                                    <div>${userInfo.shoot.shootTotal ?? 0}</div>
+                                    <div>${userInfo.shoot.effectiveShootTotal ?? 0}</div>
+                                    <div>${userInfo.shoot.ownGoal ?? 0}</div>
+                                    <div>${userInfo.shoot.shootFreekick ?? 0}</div>
+                                    <div>${userInfo.shoot.shootPenaltyKick ?? 0}</div>
+                                    <div>${userInfo.pass.passTry ?? 0}</div>
+                                    <div>${userInfo.pass.longPassTry ?? 0}</div>
+                                    <div>${userInfo.pass.throughPassTry ?? 0}</div>
+                                    <div>${userInfo.matchDetail.cornerKick ?? 0}</div>
+                                    <div>${userInfo.matchDetail.offsideCount ?? 0}</div>
+                                    <div>${userInfo.matchDetail.foul ?? 0}</div>
+                                    <div>${userInfo.matchDetail.injury ?? 0}</div>
+                                    <div>${userInfo.matchDetail.yellowCards ?? 0}</div>
+                                    <div>${userInfo.matchDetail.redCards ?? 0}</div>
                                 </div>
                                 <div class="matchEachDetailMiddlePlace">
                                     <div>점유율</div>
@@ -161,27 +165,27 @@ function matchListComponent(data, nickName){
                                     <div>레드카드</div>
                                 </div>
                                 <div class="matchEachDetailOtherPlace">
-                                    <div>${otherInfo.matchDetail.possession}</div>
+                                    <div>${otherInfo.matchDetail.possession ?? 0}</div>
                                     <div>${
                                         Math.round(
                                             otherInfo.matchDetail.averageRating * 100,
                                         ) / 100
                                     }</div>
-                                    <div>${otherInfo.shoot.goalTotalDisplay}</div>
-                                    <div>${otherInfo.shoot.shootTotal}</div>
-                                    <div>${otherInfo.shoot.effectiveShootTotal}</div>
-                                    <div>${otherInfo.shoot.ownGoal}</div>
-                                    <div>${otherInfo.shoot.shootFreekick}</div>
-                                    <div>${otherInfo.shoot.shootPenaltyKick}</div>
-                                    <div>${otherInfo.pass.passTry}</div>
-                                    <div>${otherInfo.pass.longPassTry}</div>
-                                    <div>${otherInfo.pass.throughPassTry}</div>
-                                    <div>${otherInfo.matchDetail.cornerKick}</div>
-                                    <div>${otherInfo.matchDetail.offsideCount}</div>
-                                    <div>${otherInfo.matchDetail.foul}</div>
-                                    <div>${otherInfo.matchDetail.injury}</div>
-                                    <div>${otherInfo.matchDetail.yellowCards}</div>
-                                    <div>${otherInfo.matchDetail.redCards}</div>
+                                    <div>${otherInfo.shoot.goalTotalDisplay ?? 0}</div>
+                                    <div>${otherInfo.shoot.shootTotal ?? 0}</div>
+                                    <div>${otherInfo.shoot.effectiveShootTotal ?? 0}</div>
+                                    <div>${otherInfo.shoot.ownGoal ?? 0}</div>
+                                    <div>${otherInfo.shoot.shootFreekick ?? 0}</div>
+                                    <div>${otherInfo.shoot.shootPenaltyKick ?? 0}</div>
+                                    <div>${otherInfo.pass.passTry ?? 0}</div>
+                                    <div>${otherInfo.pass.longPassTry ?? 0}</div>
+                                    <div>${otherInfo.pass.throughPassTry ?? 0}</div>
+                                    <div>${otherInfo.matchDetail.cornerKick ?? 0}</div>
+                                    <div>${otherInfo.matchDetail.offsideCount ?? 0}</div>
+                                    <div>${otherInfo.matchDetail.foul ?? 0}</div>
+                                    <div>${otherInfo.matchDetail.injury ?? 0}</div>
+                                    <div>${otherInfo.matchDetail.yellowCards ?? 0}</div>
+                                    <div>${otherInfo.matchDetail.redCards ?? 0}</div>
                                 </div>
                             </div>
                             <div class="matchEachDetailSquadWrap">

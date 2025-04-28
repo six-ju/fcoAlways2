@@ -1,0 +1,73 @@
+<link rel="stylesheet" href="/css/notice/noticeWrite.css" />
+
+<div class="noticeDetailWrap">
+    <div class="detailWrap">
+        <div class="noticeDetailInfo">
+            <select class="noticeType">
+                <option value="공지" selected>공지</option>
+                <option value="일반">일반</option>
+            </select>
+            <input
+                type="text"
+                name="title"
+                class="noticeDetailTitleInput"
+                placeholder="제목을 입력하세요"
+                required
+            />
+        </div>
+
+        <div class="noticeDetailContent">
+            <textarea
+                name="content"
+                class="noticeDetailTextarea"
+                placeholder="내용을 입력하세요"
+                required
+            ></textarea>
+        </div>
+
+        <div class="noticeDetailBtns">
+            <button class="noticeListBtn">등록하기</button>
+            <!-- <a href="/notice" class="noticeListBtn">목록으로</a> -->
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.noticeListBtn').click(function () {
+            if ($('.noticeDetailTitleInput').val() == '') {
+                showModal('제목을 입력해주세요');
+                return;
+            } else if ($('.noticeDetailTextarea').val() == '') {
+                showModal('내용을 입력해주세요');
+                return;
+            }
+
+            const data = {
+                type: $('select option:selected').val(),
+                title: $('.noticeDetailTitleInput').val(),
+                content: $('.noticeDetailTextarea').val(),
+            };
+
+            $.ajax({
+                url: `/api/notice/write`,
+                type: 'POST',
+                data,
+                beforeSend: function () {
+                    showLoading();
+                },
+                complete: function () {
+                    hideLoading();
+                },
+                success: async function (data) {
+                    if(data.id){
+                        showModal('공지되었습니다.');
+                    }
+                },
+                error: function (err) {
+                    showModal(err.responseJSON.message);
+                },
+            });
+        });
+    });
+</script>

@@ -1,32 +1,59 @@
-<link rel="stylesheet" href="/css/notice.css" />
+<link rel="stylesheet" href="/css/notice/notice.css" />
 
 <div class="noticeWrap">
-  <table class="noticetable">
-    <thead>
-      <tr>
-        <th>NO</th>
-        <th>제목</th>
-        <th>날짜</th>
-        <th>작성자</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr data-id="1">
-        <td>공지</td>
-        <td>안녕하세요. 개발자 입니다!!</td>
-        <td>2025-04-27</td>
-        <td>관리자</td>
-      </tr>
-      <!-- 이런식으로 계속 추가 -->
-    </tbody>
-  </table>
+    <table class="noticetable">
+        <thead>
+            <tr>
+                <th>NO</th>
+                <th>제목</th>
+                <th>날짜</th>
+                <th>작성자</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
 </div>
 
 <script>
-  $(document).ready(function () {
-    $("tbody>tr").click(function () {
-      const id = $(this).attr("data-id");
-      window.location.href = `/notice/detail/${id}`;
+    $(document).ready(function () {
+        getNotice();
+
+        $(document).on('click', 'tbody tr', function () {
+            const id = $(this).attr('data-id');
+            window.location.href = `/notice/detail/${id}`;
+        });
     });
-  });
+
+    async function getNotice() {
+        $.ajax({
+            url: `/api/notice/list`,
+            type: 'GET',
+            beforeSend: function () {
+                showLoading();
+            },
+            complete: function () {
+                hideLoading();
+            },
+            success: async function (data) {
+                let tdody = '';
+                if (data) {
+                    data.forEach((list) => {
+                        tdody += `
+                        <tr data-id="${list.id}">
+                            <td>${list.type == '공지' ? list.type : list.id}</td>
+                            <td>${list.title}</td>
+                            <td>${list.createdAt}</td>
+                            <td>관리자</td>
+                        </tr>
+                    `;
+
+                        $('.noticetable tbody').html(tdody);
+                    });
+                }
+            },
+            error: function (err) {
+                showModal(err.responseJSON.message);
+            },
+        });
+    }
 </script>

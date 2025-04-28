@@ -37,12 +37,27 @@ router.get('/notice', (req, res, next) => {
     }
 });
 
-// 공지사항 디테일일
+// 공지사항 디테일
 router.get('/notice/detail/:id', (req, res, next) => {
     try {
         res.render('index.ejs', { components: 'noticeDetail' });
     } catch (error) {
         next(error);
+    }
+});
+
+// 공지사항 디테일
+router.get('/notice/write/:password', (req, res, next) => {
+    try {
+        const { password } = req.params;
+
+        if(password != process.env.NOTICE_INSERT_PAGE_PW){
+            throw new Error
+        }
+
+        res.render('index.ejs', { components: 'noticeWrite' });
+    } catch (error) {
+        res.render('index.ejs', { components: 'notice' });
     }
 });
 
