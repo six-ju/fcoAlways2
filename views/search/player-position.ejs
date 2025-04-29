@@ -1,19 +1,43 @@
 <link rel="stylesheet" href="/css/search/playerPosition.css" />
 
 <div class="playerEachPositionContainer">
-    <div class="seachAndResultWrap">
+    <div class="searchAndResultWrap">
         <div>
-            <input type="text" id="playerSearchInput" placeholder="선수 검색" />
-            <ul id="playerSearchResult"></ul>
+            <input type="text" id="playerSearchInput" placeholder="선수 검색(입력시 자동 검색 됩니다.)" />
+            <ul id="playerSearchResult">
+                <!-- <li class="player">선수를 검색 해주세요</li> -->
+            </ul>
         </div>
+    </div>
+    <div class="selectPlayerWrap hide">
+        <div class="selectPlayerBox">
+            <div class="playerInfoBox">
+                <div class="playerPhontoPlace">
+                    <div class="playerSeason"></div>
+                    <div class="playerImg"></div>
+                </div>
+            </div>
+        </div>  
     </div>
 </div>
 
 <script>
     $(document).ready(function () {
-        $('#playerSearchResult').change(function () {
-            console.log(123);
+        $('#playerSearchResult').on('mouseenter', '.player', function() {
+            $(this).css({'background-color': '#d9d9d9','cursor': 'pointer'});
+        }).on('mouseleave', '.player', function() {
+            $(this).css({'background-color': '','cursor': ''});
         });
+
+        $(document).on('click','.player',function(){
+            const player = $(this).text()   
+            $('#playerSearchInput').val(player)
+            $('#playerSearchInput').css('border-radius',' 15px')
+            $('.searchAndResultWrap').addClass('hide')
+            $('.selectPlayerWrap').removeClass('hide')
+
+            getSelectPlayer()
+        })
 
         const handlePlayerSearch = function () {
             const playerName = $(this).val();
@@ -22,19 +46,56 @@
                 url: `/api/nexon/search/player/${playerName}`,
                 type: 'GET',
                 success: function (data) {
-                    if (data) {
-                        let list = '';
-
+                    let list = '';
+                    console.log(data)
+                    if (data.length > 0) {
                         data.map((player) => {
-                            list += `<p>${player.playerName}</p>`;
+                            list += `<li class="player">${player.playerName}</li>`;
                         });
 
                         $('#playerSearchResult').html(list);
+                        $('#playerSearchInput').css('border-radius',' 15px 15px 0 0')
+                    }else{
+                        list = `<li class="player">검색된 선수가 없습니다</li>`;
+                    
+                        $('#playerSearchResult').html(list);
+                        $('#playerSearchInput').css('border-radius',' 15px 15px 0 0')
                     }
                 },
+                error: function(error){
+                    let list = '';
+                    list = `<li class="player">검색된 선수가 없습니다</li>`;
+                    
+                    $('#playerSearchResult').html(list);
+                }
             });
         };
 
-        $('#playerSearchInput').on('input', debounce(500, handlePlayerSearch));
+        $('#playerSearchInput').on('input', debounce(200, handlePlayerSearch));
     });
+
+    async function getSelectPlayer() {
+        $.ajax({
+            url:``,
+            type:'GET',
+            beforeSend: function () {
+                $('.matchList').empty();
+                showLoading();
+            },
+            complete: function () {
+                hideLoading();
+            },
+            success: async function (data) {
+                console.log(data);
+                if (data) {
+                    const list = matchListComponent(data, nickName)
+
+                    $('.matchList').html(list);
+                }
+            },
+            error: function (err) {
+                showModal(err.responseJSON.message);
+            },
+        })
+    }
 </script>

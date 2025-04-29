@@ -92,7 +92,7 @@ class nexonRepository {
         }
     };
 
-    // 선수 가져오기 20명 제한
+    // 선수 가져오기 5명 제한
     searchPlayer = async (player) => {
         try {
             const playerList = await Player.findAll({

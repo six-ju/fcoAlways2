@@ -1,23 +1,85 @@
-.seachAndResultWrap {
+.searchAndResultWrap {
     margin: 100px auto;
     padding: 0 20px;
 }
 
-.seachAndResultWrap div {
+.searchAndResultWrap div {
     margin: 0 auto;
     width: 100%;
-    max-width: 320px;
+    max-width: 375px;
     display: flex;
     flex-direction: column;
 }
 
 #playerSearchInput {
-    width: 100%;
-    border: 0;
+    outline: none;
+    border: 0px solid black;
     padding: 20px 25px;
-    border-radius: 25px;
+    border-radius: 15px;
+    border-bottom: 1px solid;
 }
 
 #playerSearchResult {
     background-color: white;
+    margin: 0;
+    width: 375px;
+    border-radius: 0 0 15px 15px;
+    padding: 0;
+}
+
+#playerSearchResult li:last-child {
+    border-radius: 0 0 15px 15px;
+}
+
+.player {
+    list-style-type: none;
+    padding: 10px 23px;
+}
+
+.selectPlayerWrap {
+    margin: 100px auto;
+    padding: 0 20px;
+}
+
+.selectPlayerBox {
+    border: 1px solid black;
+    background: white;
+    height: 450px;
+    border-radius: 15px;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 375px;
+}
+
+/* 애니매이션 */
+/* 공통 트랜지션 설정 */
+/* 1) 첫 번째 영역: 기본 상태(보임) → hide 상태(위로 사라짐) */
+.searchAndResultWrap,
+.selectPlayerWrap {
+    transition: transform 0.8s ease, opacity 0.8s ease;
+}
+
+/* 1) 첫 번째 화면 */
+.searchAndResultWrap {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.searchAndResultWrap.hide {
+    /* .hide 충돌 피하려 slide-hide 사용 */
+    transform: translateY(-250%);
+    opacity: 0;
+    display: block !important;
+    /* 혹시 display:none 걸려도 override */
+}
+
+/* 2) 두 번째 화면 */
+.selectPlayerWrap {
+    transform: translateY(100%);
+    opacity: 0;
+}
+
+.selectPlayerWrap:not(.hide) {
+    transform: translateY(-50%);
+    opacity: 1;
 }
