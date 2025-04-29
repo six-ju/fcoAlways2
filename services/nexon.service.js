@@ -82,6 +82,18 @@ class nexonService {
         }
     };
 
+    // 선수 검색
+    searchPlayer = async (player) => {
+        try {
+            const playerList = await this.nexonRepository.searchPlayer(player);
+
+            return playerList
+        } catch (error) {
+            throw error;
+        }
+
+    }
+
     searchMatch = async (nickname, type) => {
         try {
             const matchDetailResult = [];

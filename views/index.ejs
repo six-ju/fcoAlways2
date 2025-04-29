@@ -73,6 +73,10 @@
                     <!-- 공지사항 작성 -->
                     <% if (components === 'noticeWrite') { %> <%- include('notice/write.ejs') %>
                     <% } %>
+                    
+                    <!-- 선수 포지션 별 데이터 -->
+                    <% if (components === 'playerPosition') { %> <%- include('search/player-position.ejs') %>
+                    <% } %>
                 </main>
 
                 <!-- 공통 푸터 -->

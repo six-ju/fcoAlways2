@@ -1,0 +1,23 @@
+.seachAndResultWrap {
+    margin: 100px auto;
+    padding: 0 20px;
+}
+
+.seachAndResultWrap div {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+}
+
+#playerSearchInput {
+    width: 100%;
+    border: 0;
+    padding: 20px 25px;
+    border-radius: 25px;
+}
+
+#playerSearchResult {
+    background-color: white;
+}

@@ -1,4 +1,4 @@
-const { Op } = require('sequelize');
+const { Op, where } = require('sequelize');
 const { User, Player, Season, sequelize } = require('../models');
 
 class nexonRepository {
@@ -59,7 +59,7 @@ class nexonRepository {
     insertPlayer = async (playerList) => {
         try {
             const chunkSize = 500;
-            
+
             await Player.destroy({
                 where: {}, // 모든 데이터 삭제
                 truncate: true, // 옵션: auto increment 초기화까지 할지 여부
@@ -87,6 +87,27 @@ class nexonRepository {
             });
 
             return users;
+        } catch (error) {
+            console.error('Error finding or creating user:', error);
+        }
+    };
+
+    // 선수 가져오기 20명 제한
+    searchPlayer = async (player) => {
+        try {
+            const playerList = await Player.findAll({
+                attributes: ['playerName'],
+                where: {
+                    playerName: {
+                        [Op.like]: `%${player}%`,
+                    },
+                },
+                group: ['playerName'], 
+                limit: 5,
+                raw: true,
+            });
+
+            return playerList;
         } catch (error) {
             console.error('Error finding or creating user:', error);
         }
@@ -125,7 +146,7 @@ class nexonRepository {
                 include: [
                     {
                         model: Season,
-                        attributes: ['seasonName','img'],
+                        attributes: ['seasonName', 'img'],
                     },
                 ],
             });

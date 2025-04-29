@@ -17,6 +17,18 @@ class nexonController {
         }
     };
 
+    searchPlayer = async (req, res) => {
+        try {
+            const { player } = req.params;
+
+            const result = await this.nexonService.searchPlayer(player);
+
+            return res.status(200).json(result);
+        } catch (error) {
+            return res.status(error.status || 400).json({ message: error.message });
+        }
+    };
+
     searchMatch = async (req, res) => {
         try {
             const { nickName } = req.params;

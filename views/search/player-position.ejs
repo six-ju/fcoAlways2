@@ -1,0 +1,40 @@
+<link rel="stylesheet" href="/css/search/playerPosition.css" />
+
+<div class="playerEachPositionContainer">
+    <div class="seachAndResultWrap">
+        <div>
+            <input type="text" id="playerSearchInput" placeholder="선수 검색" />
+            <ul id="playerSearchResult"></ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#playerSearchResult').change(function () {
+            console.log(123);
+        });
+
+        const handlePlayerSearch = function () {
+            const playerName = $(this).val();
+
+            $.ajax({
+                url: `/api/nexon/search/player/${playerName}`,
+                type: 'GET',
+                success: function (data) {
+                    if (data) {
+                        let list = '';
+
+                        data.map((player) => {
+                            list += `<p>${player.playerName}</p>`;
+                        });
+
+                        $('#playerSearchResult').html(list);
+                    }
+                },
+            });
+        };
+
+        $('#playerSearchInput').on('input', debounce(500, handlePlayerSearch));
+    });
+</script>
