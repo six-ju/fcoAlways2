@@ -1,4 +1,4 @@
-const { Op, where } = require('sequelize');
+const { Op, where, col } = require('sequelize');
 const { User, Player, Season, sequelize } = require('../models');
 
 class nexonRepository {
@@ -96,15 +96,48 @@ class nexonRepository {
     searchPlayer = async (player) => {
         try {
             const playerList = await Player.findAll({
-                attributes: ['playerName'],
                 where: {
                     playerName: {
                         [Op.like]: `%${player}%`,
                     },
                 },
-                group: ['playerName'], 
+                include: [
+                    {
+                        model: Season,
+                        where: { id: col('Player.season_id') },
+                        required: false, // Season이 없어도 Player는 가져오려면 false
+                    },
+                ],
+                group: ['Player.playerName'],
                 limit: 5,
                 raw: true,
+                nest:true
+            });
+
+            return playerList;
+        } catch (error) {
+            console.error('Error finding or creating user:', error);
+        }
+    };
+
+    // 선수 검색 시즌 이미지 가져오기위함
+    searchPlayerSeason = async (player) => {
+        try {
+            const playerList = await Player.findAll({
+                where: {
+                    player_id: {
+                        [Op.eq]: `${player}`,
+                    },
+                },
+                include: [
+                    {
+                        model: Season,
+                        where: { id: col('Player.season_id') },
+                        required: false, // Season이 없어도 Player는 가져오려면 false
+                    },
+                ],
+                raw: true,
+                nest:true
             });
 
             return playerList;

@@ -42,21 +42,148 @@
 }
 
 .selectPlayerBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.playerSelectTab {
     border: 1px solid black;
-    background: white;
-    height: 450px;
+    background: rgb(0, 0, 0);
+    height: 100%;
     border-radius: 15px;
     width: 100%;
     margin: 0 auto;
     max-width: 375px;
+    max-height: 500px;
 }
 
+.playerDetailTab {
+    max-width: 385px;
+    border: 1px solid black;
+    background: rgb(0, 0, 0);
+    height: 458px;
+    border-radius: 0 15px 15px 0;
+    width: 100%;
+    color: white;
+    padding: 21px 0;
+}
+
+.playerDetailSection {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 8.7px;
+}
+
+#createDate {
+    text-align: center;
+}
+
+.detailWrap {
+    display: flex;
+    padding: 20px 20px;
+}
+
+.chartDetail {
+    width: 300px;
+}
+
+.playerPhontoPlace {
+    height: 383px;
+}
+.playerImgWrap {
+    text-align: center;
+    margin: 70px 0 15px 0;
+    width: 375px;
+}
+
+.playerInfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+}
+
+.selectPlayerName {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.search {
+    width: 100%;
+    border: 0;
+    border-radius: 0 0 0px 13px;
+    padding: 13px 0;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: #4e996c;
+}
+
+.research {
+    width: 100%;
+    border: 0;
+    border-radius: 0 0 13px 0px;
+    padding: 13px 0;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: #dc4c4c;
+}
+
+.search:hover {
+    background-color: #3b7e57;
+}
+
+.research:hover {
+    background-color: #b53737;
+}
+
+.playerSeasons {
+    padding: 40px 37px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-height: 131px;
+    scrollbar-width: none;
+}
+
+.playerSeasons .seasonList {
+    padding: 5px 4px;
+    filter: brightness(0.5);
+}
+
+.playerSeasons .seasonList:hover {
+    filter: brightness(1);
+}
+
+.playerPosition {
+    border: 0;
+    border-radius: 10px;
+    padding: 0 5px;
+    outline: none;
+}
+
+.postionBtnWrap {
+    display: flex;
+}
+
+.positionAndAvg {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 2px 0 20px 0;
+}
+
+.selectPostion,
+.selectAvg {
+    color: white;
+}
 /* 애니매이션 */
 /* 공통 트랜지션 설정 */
 /* 1) 첫 번째 영역: 기본 상태(보임) → hide 상태(위로 사라짐) */
 .searchAndResultWrap,
 .selectPlayerWrap {
-    transition: transform 0.8s ease, opacity 0.8s ease;
+    transition: transform 1s ease, opacity 1s ease;
 }
 
 /* 1) 첫 번째 화면 */
@@ -80,6 +207,6 @@
 }
 
 .selectPlayerWrap:not(.hide) {
-    transform: translateY(-50%);
+    transform: translateY(-35%);
     opacity: 1;
 }
