@@ -12,6 +12,10 @@
         <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
         <meta name="description" content="FCOAlways - 피파온라인4 공식경기 검색 및 분석 서비스" />
         <meta name="author" content="FCOAlways" />
+        <meta
+            name="keywords"
+            content="피파온라인4, FO4, 전적검색, 선수분석, 공식경기, FCOAlways, 게임, PC, 전적, 선수, 피파, 피온, 피온4, 피파4, fifa,fifa4,online,fco,fcoalways,PC방"
+        />
 
         <!-- Open Graph (페북, 카카오톡 공유용) -->
         <meta property="og:title" content="FCOAlways - 피파온라인4 공식경기 검색 사이트" />
@@ -26,8 +30,12 @@
         />
 
         <!-- 넥슨 Analytics  -->
-        <script type="text/javascript" src="https://openapi.nexon.com/js/analytics.js?app_id=203916" async></script>
-        
+        <script
+            type="text/javascript"
+            src="https://openapi.nexon.com/js/analytics.js?app_id=203916"
+            async
+        ></script>
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     </head>
@@ -51,32 +59,30 @@
 
                 <main class="mainArea">
                     <!-- 메인 검색 바 -->
-                    <% if (components === 'main') { %> <%- include('main/index.ejs') %>
-                    <% } %>
+                    <% if (components === 'main') { %> <%- include('main/index.ejs') %> <% } %>
 
                     <!-- 메인 검색 바 -->
                     <% if (components === 'searchNickname') { %> <%- include('search/index.ejs') %>
                     <% } %>
 
                     <!-- 강화 시뮬레이션 -->
-                    <% if (components === 'upgrade') { %> <%- include('simulation/playerUpgrade.ejs') %>
-                    <% } %>
+                    <% if (components === 'upgrade') { %> <%-
+                    include('simulation/playerUpgrade.ejs') %> <% } %>
 
                     <!-- 공지사항 -->
-                    <% if (components === 'notice') { %> <%- include('notice/notice.ejs') %>
-                    <% } %>
+                    <% if (components === 'notice') { %> <%- include('notice/notice.ejs') %> <% } %>
 
                     <!-- 공지사항 디테일 -->
                     <% if (components === 'noticeDetail') { %> <%- include('notice/detail.ejs') %>
                     <% } %>
-                    
+
                     <!-- 공지사항 작성 -->
-                    <% if (components === 'noticeWrite') { %> <%- include('notice/write.ejs') %>
-                    <% } %>
-                    
+                    <% if (components === 'noticeWrite') { %> <%- include('notice/write.ejs') %> <%
+                    } %>
+
                     <!-- 선수 포지션 별 데이터 -->
-                    <% if (components === 'playerPosition') { %> <%- include('search/player-position.ejs') %>
-                    <% } %>
+                    <% if (components === 'playerPosition') { %> <%-
+                    include('search/player-position.ejs') %> <% } %>
                 </main>
 
                 <!-- 공통 푸터 -->
