@@ -9,7 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 generateSitemap(); 
-require('./utills/scheduler');
+// require('./utills/scheduler');
 
 // EJS 템플릿 설정
 app.set('views', path.join(__dirname, 'views'));
