@@ -1,0 +1,397 @@
+<link rel="stylesheet" href="/css/search/playerPosition.css" />
+
+<div class="playerEachPositionContainer">
+    <div class="searchAndResultWrap">
+        <div>
+            <input
+                type="text"
+                id="playerSearchInput"
+                placeholder="선수 검색(입력시 자동 검색 됩니다.)"
+            />
+            <ul id="playerSearchResult">
+                <!-- <li class="player">선수를 검색 해주세요</li> -->
+            </ul>
+        </div>
+    </div>
+    <div class="selectPlayerWrap hide">
+        <div class="selectPlayerBox">
+            <div class="playerSelectTab">
+                <div class="playerInfoBox">
+                    <div class="playerPhontoPlace">
+                        <div class="playerImgWrap">
+                            <img src="" alt="" class="playerImg" loading="lazy" onerror="" />
+                        </div>
+                        <div class="playerInfo">
+                            <img
+                                src=""
+                                alt=""
+                                class="selectPlayerSeason"
+                                loading="lazy"
+                                onerror=""
+                            />
+                            <div class="selectPlayerName"></div>
+                            <select class="playerPosition">
+                                <option value="0">GK</option>
+                                <option value="1">SW</option>
+                                <option value="2">RWB</option>
+                                <option value="3">RB</option>
+                                <option value="4">RCB</option>
+                                <option value="5">CB</option>
+                                <option value="6">LCB</option>
+                                <option value="7">LB</option>
+                                <option value="8">LWB</option>
+                                <option value="9">RDM</option>
+                                <option value="10">CDM</option>
+                                <option value="11">LDM</option>
+                                <option value="12">RM</option>
+                                <option value="13">RCM</option>
+                                <option value="14">CM</option>
+                                <option value="15">LCM</option>
+                                <option value="16">LM</option>
+                                <option value="17">RAM</option>
+                                <option value="18">CAM</option>
+                                <option value="19">LAM</option>
+                                <option value="20">RF</option>
+                                <option value="21">CF</option>
+                                <option value="22">LF</option>
+                                <option value="23">RW</option>
+                                <option value="24">RS</option>
+                                <option value="25">ST</option>
+                                <option value="26">LS</option>
+                                <option value="27">LW</option>
+                            </select>
+                        </div>
+                        <div class="playerSeasons"></div>
+                    </div>
+                </div>
+                <div class="postionBtnWrap">
+                    <button class="search">검색</button>
+                    <button class="research">선수변경</button>
+                </div>
+            </div>
+            <div class="playerDetailTab hide">
+                <div class="positionAndAvg">
+                    <div class="selectPostion">포지션 : <span id="spPosition">GK</span></div>
+                    <div class="selectAvg">총 <span id="matchCount">20</span> 경기평균</div>
+                </div>
+                <div class="playerDetailSection">
+                    <div class="detailWrap">
+                        <div class="chartDetail">슛 : <span id="shoot"></span></div>
+                        <div class="chartDetail">유효 슛 : <span id="effectiveShoot"></span></div>
+                    </div>
+                    <div class="detailWrap">
+                        <div class="chartDetail">어시스트 : <span id="assist"></span></div>
+                        <div class="chartDetail">득점 : <span id="goal"></span></div>
+                    </div>
+                    <div class="detailWrap">
+                        <div class="chartDetail">드리블 시도 : <span id="dribbleTry"></span></div>
+                        <div class="chartDetail">
+                            드리블 성공 : <span id="dribbleSuccess"></span>
+                        </div>
+                    </div>
+                    <div class="detailWrap">
+                        <div class="chartDetail">패스 시도 : <span id="passTry"></span></div>
+                        <div class="chartDetail">패스 성공 : <span id="passSuccess"></span></div>
+                    </div>
+                    <div class="detailWrap">
+                        <div class="chartDetail">블락 성공 : <span id="block"></span></div>
+                        <div class="chartDetail">태클 성공 : <span id="tackle"></span></div>
+                    </div>
+                    <div>갱신 날짜 :<span id="createDate"></span></div>
+                    <div>평균 점수 :<span id="overallScore"></span></div>
+                    <div>한줄 평 :<span id="oneWord"></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        // 리스트에 마우스 호버했을때
+        $('#playerSearchResult')
+            .on('mouseenter', '.player', function () {
+                $(this).css({ 'background-color': '#d9d9d9', cursor: 'pointer' });
+            })
+            .on('mouseleave', '.player', function () {
+                $(this).css({ 'background-color': '', cursor: '' });
+            });
+
+        // 시즌 클릭시 불드러옴
+        $(document).on('click', '.seasonList', function () {
+            const playerId = $(this).attr('data-playerId');
+            const url = `https://fco.dn.nexoncdn.co.kr/live/externalAssets/common/playersAction/p${playerId}.png`;
+            const playerErrorUrl = `
+                this.onerror=null; this.src='https://fco.dn.nexoncdn.co.kr/live/externalAssets/common/players/p${parseInt(
+                    playerId.slice(3),
+                )}.png';
+            `;
+
+            $('.playerImg').attr('src', url);
+            $('.playerImg').attr('onerror', playerErrorUrl);
+            $('.selectPlayerSeason').attr('src', $(this).attr('data-seasonUrl'));
+
+            $('.seasonList').removeClass('selectSeason');
+            $('.seasonList').css('filter', 'brightness(0.5)');
+            $(this).css('filter', 'brightness(1)');
+            $(this).addClass('selectSeason');
+        });
+
+        // 검색후 리스트 클릭시
+        $(document).on('click', '.player', function () {
+            const player = $(this).text();
+            const playerId = $(this).attr('data-playerid');
+            $('#playerSearchResult').empty();
+            $('#playerSearchInput').val('');
+            $('#playerSearchInput').css('border-radius', ' 15px');
+            $('.searchAndResultWrap').addClass('hide');
+            $('.selectPlayerWrap').removeClass('hide');
+
+            const url = `https://fco.dn.nexoncdn.co.kr/live/externalAssets/common/playersAction/p${$(
+                this,
+            ).attr('data-id')}.png`;
+            const playerErrorUrl = `
+                this.onerror=null; this.src='https://fco.dn.nexoncdn.co.kr/live/externalAssets/common/players/p${playerId}.png';
+            `;
+            $('.selectPlayerName').text(player);
+            $('.playerImg').attr('src', url);
+            $('.playerImg').attr('onerror', playerErrorUrl);
+            $('.selectPlayerSeason').attr('src', $(this).attr('data-seasonimg'));
+            getSeasonImgForPlayer(playerId);
+        });
+
+        // 검색
+        $('.search').click(async function () {
+            const selectPosition = $('.playerPosition').val();
+            const selectPlayer = $('.selectSeason').attr('data-playerid');
+
+            if (!selectPlayer) {
+                showModal('시즌을 선택해주세요');
+                return;
+            }
+
+            await getDetail(selectPlayer, selectPosition);
+        });
+
+        // 재검색
+        $('.research').click(function () {
+            $('.selectPlayerWrap').addClass('hide');
+            $('.playerDetailTab').addClass('hide');
+            $('.searchAndResultWrap').removeClass('hide');
+        });
+
+        const handlePlayerSearch = function () {
+            const playerName = $(this).val();
+
+            $.ajax({
+                url: `/api/nexon/search/player/${playerName}`,
+                type: 'GET',
+                success: function (data) {
+                    let list = '';
+                    if (data.length > 0) {
+                        data.map((player) => {
+                            list += `<li class="player" 
+                            data-id=${player.season_id + player.player_id} 
+                            data-playerid=${player.player_id} 
+                            data-seasonimg=${player.Season.img}
+                            >${player.playerName}</li>`;
+                        });
+
+                        $('#playerSearchResult').html(list);
+                        $('#playerSearchInput').css('border-radius', ' 15px 15px 0 0');
+                    } else {
+                        list = `<li class="player">검색된 선수가 없습니다</li>`;
+
+                        $('#playerSearchResult').html(list);
+                        $('#playerSearchInput').css('border-radius', ' 15px 15px 0 0');
+                    }
+                },
+                error: function (error) {
+                    let list = '';
+                    list = `<li class="player">검색된 선수가 없습니다</li>`;
+
+                    $('#playerSearchResult').html(list);
+                    $('#playerSearchInput').css('border-radius', ' 15px 15px 0 0');
+                },
+            });
+        };
+
+        $('#playerSearchInput').on('input', debounce(300, handlePlayerSearch));
+    });
+
+    async function getSeasonImgForPlayer(player) {
+        $.ajax({
+            url: `/api/nexon/search/player/season/${player}`,
+            type: 'GET',
+            beforeSend: function () {
+                showLoading();
+            },
+            complete: function () {
+                hideLoading();
+            },
+            success: async function (data) {
+                let list = '';
+                if (data) {
+                    data.map((season) => {
+                        list += `
+                            <img src="${
+                                season.Season.img
+                            }" alt="" class="seasonList" loading="lazy" onerror="" data-seasonUrl="${
+                            season.Season.img
+                        }" data-playerId="${season.season_id + season.player_id}"/>
+                        `;
+                    });
+                }
+                $('.playerSeasons').html(list);
+            },
+            error: function (err) {
+                showModal(err.responseJSON.message);
+            },
+        });
+    }
+
+    // 검색된 선수 Detail 가져오기
+    async function getDetail(player, position) {
+        $.ajax({
+            url: `/api/nexon/search/player/detail`,
+            type: 'GET',
+            data: { player, position },
+            beforeSend: function () {
+                showLoading();
+            },
+            complete: function () {
+                hideLoading();
+            },
+            success: async function (data) {
+                const positionWeights = {
+                    defense: {
+                        // 수비수
+                        dribble: 0.1, // 탈압박 능력
+                        pass: 0.2, // 빌드업 패스
+                        shot: 0.1, // 압박 시 슈팅까지 연결
+                        tackle: 0.6, // 태클/차단 능력
+                    },
+                    midfield: {
+                        // 미드필더
+                        dribble: 0.25, // 압박 돌파
+                        pass: 0.5, // 경기 조율 패스
+                        shot: 0.15, // 중거리 슈팅·유효 슈팅
+                        tackle: 0.1, // 수비 기여도
+                    },
+                    attack: {
+                        // 공격수
+                        dribble: 0.3, // 1대1 상황 돌파
+                        pass: 0.2, // 결정적 패스
+                        shot: 0.5, // 골 결정력·유효 슈팅
+                        // ※ 수비 contribution은 거의 없으므로 tackle 제외
+                    },
+                };
+
+                if (data.length > 0) {
+                    const dribbleSuccess = Math.round(data[0].status.dribbleSuccess * 100) / 100;
+                    const dribbleTry = Math.round(data[0].status.dribbleTry * 100) / 100;
+                    const passSuccess = Math.round(data[0].status.passSuccess * 100) / 100;
+                    const passTry = Math.round(data[0].status.passTry * 100) / 100;
+                    const effectiveShoot = Math.round(data[0].status.effectiveShoot * 100) / 100;
+                    const shoot = Math.round(data[0].status.shoot * 100) / 100;
+                    const tacklePerMatch = Math.round(data[0].status.tackle * 100) / 100;
+
+                    $('#assist').text(Math.round(data[0].status.assist * 100) / 100);
+                    $('#block').text(Math.round(data[0].status.block * 100) / 100);
+                    $('#dribble').text(Math.round(data[0].status.dribble * 100) / 100);
+                    $('#dribbleSuccess').text(dribbleSuccess);
+                    $('#dribbleTry').text(dribbleTry);
+                    $('#effectiveShoot').text(effectiveShoot);
+                    $('#goal').text(Math.round(data[0].status.goal * 100) / 100);
+                    $('#matchCount').text(Math.round(data[0].status.matchCount * 100) / 100);
+                    $('#passSuccess').text(passSuccess);
+                    $('#passTry').text(passTry);
+                    $('#shoot').text(shoot);
+                    $('#tackle').text(Math.round(data[0].status.tackle * 100) / 100);
+                    $('#createDate').text(dayjs(data[0].createDate).format('YYYY-MM-DD'));
+                    $('#spPosition').text(data[0].spPosition);
+
+                    const dribbleRate = dribbleSuccess / dribbleTry;
+                    const passRate = passSuccess / passTry;
+                    const shotRate = effectiveShoot / shoot;
+                    const tackleRate = Math.min(tacklePerMatch / 3, 1);
+
+                    // 4) 점수 계산 함수
+                    function calcScore(rates, weights) {
+                        let sum = 0;
+                        if (weights.dribble) sum += rates.dribble * weights.dribble;
+                        if (weights.pass) sum += rates.pass * weights.pass;
+                        if (weights.shot) sum += rates.shot * weights.shot;
+                        if (weights.tackle) sum += rates.tackle * weights.tackle;
+                        return (sum * 10).toFixed(2); // 0~1 → 0~10, 소수 둘째자리까지
+                    }
+
+                    // 5) 각 포지션별 점수
+                    const rates = {
+                        dribble: dribbleRate,
+                        pass: passRate,
+                        shot: shotRate,
+                        tackle: tackleRate,
+                    };
+                    const defScore = parseFloat(calcScore(rates, positionWeights.defense)) || 0;
+                    const midScore = parseFloat(calcScore(rates, positionWeights.midfield)) || 0;
+                    const attScore = parseFloat(calcScore(rates, positionWeights.attack)) || 0;
+
+                    console.log(defScore);
+                    console.log(midScore);
+                    console.log(attScore);
+                    const overallScore = ((defScore + midScore + attScore) / 3).toFixed(2) || 0;
+                    $('#overallScore').text(overallScore || 0);
+
+                    // 1) 점수 범위에 따라 단계 구분
+                    function getTier(score) {
+                        if (score < 4.5) return 'poor'; // 0~3.99 : 별로
+                        if (score < 6.5) return 'average'; // 4~6.99 : 그저그런
+                        return 'excellent'; // 7~10   : 너무 좋은
+                    }
+
+                    // 2) 단계별 문구 목록
+                    const messages = {
+                        poor: [
+                            '아직 멀었어요...😅',
+                            '컨디션 난조인가요?',
+                            '다음엔 더 날아봅시다!',
+                            '아쉬움이 남는 경기력...',
+                        ],
+                        average: [
+                            '그저그런 평타!',
+                            '무난무난 그 자체👍',
+                            '평범함의 미학?',
+                            '살짝 아쉬움이 남네요',
+                        ],
+                        excellent: [
+                            '월드 클래스!🌟',
+                            '레전드급 퍼포먼스!',
+                            '경이로운 경기력!',
+                            '최고의 순간을 보여줬어요!',
+                        ],
+                    };
+
+                    // 3) 무작위 문구 뽑기
+                    function randomMessage(tier) {
+                        const arr = messages[tier];
+                        return arr[Math.floor(Math.random() * arr.length)];
+                    }
+
+                    // 4) 실제 사용 예시
+                    const tier = getTier(overallScore);
+                    const phrase = randomMessage(tier);
+
+                    $('#oneWord').text(phrase);
+                    $('.playerSelectTab').css({ 'border-radius': '15px 0 0 15px', margin: '0' });
+                    $('.playerDetailTab').removeClass('hide');
+                }
+            },
+            error: function (err) {
+                $('.playerDetailTab').addClass('hide');
+                $('.playerSelectTab').css({ 'border-radius': '15px', margin: '0' });
+                showModal(err.responseJSON.message);
+            },
+        });
+    }
+</script>

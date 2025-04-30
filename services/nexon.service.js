@@ -82,10 +82,65 @@ class nexonService {
         }
     };
 
+    // 선수 검색
+    searchPlayer = async (player) => {
+        try {
+            const playerList = await this.nexonRepository.searchPlayer(player);
+
+            return playerList;
+        } catch (error) {
+            throw error;
+        }
+    };
+
+    // 선수 검색 시즌 이미지 가져오기위함
+    searchPlayerSeason = async (playerId) => {
+        try {
+            const playerList = await this.nexonRepository.searchPlayerSeason(playerId);
+
+            return playerList;
+        } catch (error) {
+            throw error;
+        }
+    };
+
+    // 특정 선수 평균 데이터 가져오기
+    getPlayerDetail = async (player, position) => {
+        try {
+            const arrInfo = [
+                {
+                    id: player,
+                    po: position,
+                },
+            ];
+            const json = JSON.stringify(arrInfo);
+            const encodedJSON = encodeURIComponent(json);
+
+            const result = await axios.get(
+                `${startUrl}/fconline/v1/ranker-stats?matchtype=50&players=${encodedJSON}`,
+                {
+                    headers: {
+                        'x-nxopen-api-key': process.env.NEXON_API_KEY,
+                    },
+                },
+            );
+
+            if (result.data.length == 0) {
+                throw new Error('해당 포지션의 대한 데이터가 없습니다.');
+            }
+
+            result.data[0]['spPosition'] = POSITION[result.data[0]['spPosition']];
+
+            return result.data;
+        } catch (error) {
+            throw error;
+        }
+    };
+
     searchMatch = async (nickname, type) => {
         try {
             const matchDetailResult = [];
-            const gameType = type == 'manager' ? '52' : '50'
+            const gameType = type == 'manager' ? '52' : '50';
 
             // 유저 ouid 조회
             const ouid = await this.nexonRepository.getOuid(nickname);
@@ -117,11 +172,11 @@ class nexonService {
             for (const data of matchDetailResult) {
                 data[1][0].player.sort((a, b) => a.spPosition - b.spPosition);
                 data[1][1].player.sort((a, b) => a.spPosition - b.spPosition);
-            
+
                 await processPlayerGroup(data[1][0].player, this);
                 await processPlayerGroup(data[1][1].player, this);
             }
-            
+
             return matchDetailResult;
         } catch (error) {
             console.error('Error fetching match details:', error);
@@ -150,16 +205,18 @@ function chunkArray(array, size) {
 async function processPlayerGroup(players, ctx) {
     const chunks = chunkArray(players, 10);
     for (const group of chunks) {
-        await Promise.all(group.map(async (player) => {
-            if (player.spPosition !== 28) {
-                player.spPosition = POSITION[player.spPosition];
-                const info = await getCachedPlayerInfo.call(ctx, player.spId);
-                player.playerName = info.playerName;
-                player.playerImg = info.playerImg;
-                player.seasonName = info.seasonName;
-                player.seasonImg = info.img;
-            }
-        }));
+        await Promise.all(
+            group.map(async (player) => {
+                if (player.spPosition !== 28) {
+                    player.spPosition = POSITION[player.spPosition];
+                    const info = await getCachedPlayerInfo.call(ctx, player.spId);
+                    player.playerName = info.playerName;
+                    player.playerImg = info.playerImg;
+                    player.seasonName = info.seasonName;
+                    player.seasonImg = info.img;
+                }
+            }),
+        );
     }
 }
 

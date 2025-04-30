@@ -1,4 +1,4 @@
-const { Op } = require('sequelize');
+const { Op, where, col } = require('sequelize');
 const { User, Player, Season, sequelize } = require('../models');
 
 class nexonRepository {
@@ -59,7 +59,7 @@ class nexonRepository {
     insertPlayer = async (playerList) => {
         try {
             const chunkSize = 500;
-            
+
             await Player.destroy({
                 where: {}, // 모든 데이터 삭제
                 truncate: true, // 옵션: auto increment 초기화까지 할지 여부
@@ -87,6 +87,60 @@ class nexonRepository {
             });
 
             return users;
+        } catch (error) {
+            console.error('Error finding or creating user:', error);
+        }
+    };
+
+    // 선수 가져오기 5명 제한
+    searchPlayer = async (player) => {
+        try {
+            const playerList = await Player.findAll({
+                where: {
+                    playerName: {
+                        [Op.like]: `%${player}%`,
+                    },
+                },
+                include: [
+                    {
+                        model: Season,
+                        where: { id: col('Player.season_id') },
+                        required: false, // Season이 없어도 Player는 가져오려면 false
+                    },
+                ],
+                group: ['Player.playerName'],
+                limit: 5,
+                raw: true,
+                nest:true
+            });
+
+            return playerList;
+        } catch (error) {
+            console.error('Error finding or creating user:', error);
+        }
+    };
+
+    // 선수 검색 시즌 이미지 가져오기위함
+    searchPlayerSeason = async (player) => {
+        try {
+            const playerList = await Player.findAll({
+                where: {
+                    player_id: {
+                        [Op.eq]: `${player}`,
+                    },
+                },
+                include: [
+                    {
+                        model: Season,
+                        where: { id: col('Player.season_id') },
+                        required: false, // Season이 없어도 Player는 가져오려면 false
+                    },
+                ],
+                raw: true,
+                nest:true
+            });
+
+            return playerList;
         } catch (error) {
             console.error('Error finding or creating user:', error);
         }
@@ -125,7 +179,7 @@ class nexonRepository {
                 include: [
                     {
                         model: Season,
-                        attributes: ['seasonName','img'],
+                        attributes: ['seasonName', 'img'],
                     },
                 ],
             });

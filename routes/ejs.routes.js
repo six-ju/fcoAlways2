@@ -46,7 +46,7 @@ router.get('/notice/detail/:id', (req, res, next) => {
     }
 });
 
-// 공지사항 디테일
+// 공지사항 작성
 router.get('/notice/write/:password', (req, res, next) => {
     try {
         const { password } = req.params;
@@ -58,6 +58,15 @@ router.get('/notice/write/:password', (req, res, next) => {
         res.render('index.ejs', { components: 'noticeWrite' });
     } catch (error) {
         res.render('index.ejs', { components: 'notice' });
+    }
+});
+
+// 선수 포지션 별 데이터
+router.get('/search/player/position', (req, res, next) => {
+    try {
+        res.render('index.ejs', { components: 'playerPosition' });
+    } catch (error) {
+        next(error);
     }
 });
 

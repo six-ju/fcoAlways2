@@ -4,17 +4,17 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="naver-site-verification" content="1f7263d85e618ce68cb85f2ca0885746623ade60" />
-        <title>FCOAlways - 피파온라인 전적, 선수 분석, 공식 경기 검색</title>
+        <title>FCOAlways - 피파온라인4 전적, 선수 분석, 공식 경기 검색</title>
         <link rel="stylesheet" href="/css/common.css" />
         <link rel="icon" type="image/png" href="/img/favicon.ico" />
 
         <!-- 아래 코드 살릴시 모바일 버전에 맞게 줄어듬 하지만 다른것도 깨지는 이슈가 있어서 추후에 개발해야됨 -->
         <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
-        <meta name="description" content="FCOAlways - 피파온라인 공식경기 검색 및 분석 서비스" />
+        <meta name="description" content="FCOAlways - 피파온라인4 공식경기 검색 및 분석 서비스" />
         <meta name="author" content="FCOAlways" />
 
         <!-- Open Graph (페북, 카카오톡 공유용) -->
-        <meta property="og:title" content="FCOAlways - 피파온라인 공식경기 검색 사이트" />
+        <meta property="og:title" content="FCOAlways - 피파온라인4 공식경기 검색 사이트" />
         <meta property="og:description" content="공식경기 전적, 선수평가, 스쿼드까지 한번에!" />
         <meta property="og:image" content="https://fcoalways.online/img/kakaobanner.png" />
         <meta property="og:url" content="https://fcoalways.online" />
@@ -72,6 +72,10 @@
                     
                     <!-- 공지사항 작성 -->
                     <% if (components === 'noticeWrite') { %> <%- include('notice/write.ejs') %>
+                    <% } %>
+                    
+                    <!-- 선수 포지션 별 데이터 -->
+                    <% if (components === 'playerPosition') { %> <%- include('search/player-position.ejs') %>
                     <% } %>
                 </main>
 
