@@ -9,7 +9,7 @@ $(document).ready(async function () {
             const nickName = $(this).val().trim();
 
             if (nickName != '') {
-                window.location.href = `/search/${nickName}`
+                window.location.href = `/record/${nickName}`
             }
         }
     });
@@ -18,7 +18,7 @@ $(document).ready(async function () {
         const nickName = $('#nickname').val().trim();
 
         if (nickName != '') {
-            window.location.href = `/search/${nickName}`
+            window.location.href = `/record/${nickName}`
         }
     });
 
