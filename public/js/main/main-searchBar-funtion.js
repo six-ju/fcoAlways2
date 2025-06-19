@@ -5,7 +5,7 @@ $(document).ready(function () {
             const nickName = $(this).val().trim();
 
             if (nickName != '') {
-                window.location.href = `/search/${nickName}`
+                window.location.href = `/record/${nickName}`
             }
         }
     });
@@ -14,7 +14,7 @@ $(document).ready(function () {
         const nickName = $('#nickname').val().trim();
 
         if (nickName != '') {
-            window.location.href = `/search/${nickName}`
+            window.location.href = `/record/${nickName}`
         }
     });
 })

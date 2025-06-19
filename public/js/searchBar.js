@@ -189,7 +189,7 @@ $(document).ready(async function () {
 
 async function searchNickName(nickName) {
     $.ajax({
-        url: `/api/nexon/search/${nickName}`,
+        url: `/api/nexon/record/${nickName}`,
         type: 'GET',
         beforeSend: function () {
             $('.matchList').empty();

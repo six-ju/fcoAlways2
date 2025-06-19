@@ -8,7 +8,7 @@ class nexonController {
     searchNickName = async (req, res) => {
         try {
             const { nickName } = req.params;
-
+console.log(nickName)
             const result = await this.nexonService.searchNickName(nickName);
 
             return res.status(200).json(result);
