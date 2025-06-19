@@ -5,7 +5,7 @@ const NexonController = require('../controllers/nexon.controller');
 const nexonController = new NexonController();
 
 // 닉네임 검색
-router.get('/search/:nickName', nexonController.searchNickName);
+router.get('/record/:nickName', nexonController.searchNickName);
 
 
 // 선수 검색 시즌 이미지 가져오기위함

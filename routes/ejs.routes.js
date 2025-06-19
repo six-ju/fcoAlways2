@@ -11,7 +11,7 @@ router.get('/', (req, res, next) => {
 });
 
 // 검색페이지
-router.get('/search/:nickname', (req, res, next) => {
+router.get('/record/:nickname', (req, res, next) => {
     try {
         res.render('index.ejs', { components: 'searchNickname' });
     } catch (error) {
