@@ -139,7 +139,7 @@ class nexonService {
 
     searchMatch = async (nickname, type) => {
         try {
-            const matchDetailResult = [];
+            let matchDetailResult = [];
             const gameType = type == 'manager' ? '52' : '50';
 
             // 유저 ouid 조회
@@ -155,19 +155,19 @@ class nexonService {
                 },
             );
 
-            for (const id of matchIdResult.data) {
-                const detailData = await axios.get(
+            const results = await Promise.all(
+                matchIdResult.data.map(async (id) => {
+                    const detailData = await axios.get(
                     `${startUrl}/fconline/v1/match-detail?matchid=${id}`,
                     {
-                        headers: {
-                            'x-nxopen-api-key': process.env.NEXON_API_KEY,
-                        },
-                    },
-                );
-                matchDetailResult.push([detailData.data.matchDate, detailData.data.matchInfo]);
+                        headers: { 'x-nxopen-api-key': process.env.NEXON_API_KEY },
+                    }
+                    );
+                    return [detailData.data.matchDate, detailData.data.matchInfo];
+                })
+            );
 
-                // await sleep(80); // 100ms 쉬고 다음 요청
-            }
+            matchDetailResult = results;
 
             for (const data of matchDetailResult) {
                 data[1][0].player.sort((a, b) => a.spPosition - b.spPosition);
@@ -194,30 +194,19 @@ async function getCachedPlayerInfo(spId) {
     return info;
 }
 
-function chunkArray(array, size) {
-    const result = [];
-    for (let i = 0; i < array.length; i += size) {
-        result.push(array.slice(i, i + size));
-    }
-    return result;
-}
-
 async function processPlayerGroup(players, ctx) {
-    const chunks = chunkArray(players, 10);
-    for (const group of chunks) {
-        await Promise.all(
-            group.map(async (player) => {
-                if (player.spPosition !== 28) {
-                    player.spPosition = POSITION[player.spPosition];
-                    const info = await getCachedPlayerInfo.call(ctx, player.spId);
-                    player.playerName = info.playerName;
-                    player.playerImg = info.playerImg;
-                    player.seasonName = info.seasonName;
-                    player.seasonImg = info.img;
-                }
-            }),
-        );
-    }
+    return await Promise.all(
+        players.map(async (player) => {
+            if (player.spPosition !== 28) {
+                player.spPosition = POSITION[player.spPosition];
+                const info = await getCachedPlayerInfo.call(ctx, player.spId);
+                player.playerName = info.playerName;
+                player.playerImg = info.playerImg;
+                player.seasonName = info.seasonName;
+                player.seasonImg = info.img;
+            }
+        }),
+    );
 }
 
 module.exports = nexonService;
